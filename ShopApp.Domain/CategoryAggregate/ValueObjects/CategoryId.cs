@@ -1,4 +1,4 @@
-using ShopApp.Domain.Common;
+using ShopApp.Domain.Common.Models;
 
 namespace ShopApp.Domain.CategoryAggregate.ValueObjects;
 

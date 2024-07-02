@@ -1,4 +1,4 @@
-namespace ShopApp.Domain.Common;
+namespace ShopApp.Domain.Common.Models;
 
 
 public abstract class ValueObject : IEquatable<ValueObject>
@@ -8,7 +8,7 @@ public abstract class ValueObject : IEquatable<ValueObject>
 
     public override bool Equals(object? obj)
     {
-        if(obj is null || obj.GetType() != GetType())
+        if (obj is null || obj.GetType() != GetType())
         {
             return false;
         }
@@ -19,12 +19,12 @@ public abstract class ValueObject : IEquatable<ValueObject>
                     SequenceEqual(valueObjet.GetEqualityComponents());
     }
 
-    public static bool operator==(ValueObject left, ValueObject right)
+    public static bool operator ==(ValueObject left, ValueObject right)
     {
         return Equals(left, right);
     }
 
-    public static bool operator!=(ValueObject left, ValueObject right)
+    public static bool operator !=(ValueObject left, ValueObject right)
     {
         return !Equals(left, right);
     }

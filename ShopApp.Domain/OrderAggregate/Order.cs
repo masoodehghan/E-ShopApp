@@ -1,5 +1,5 @@
 using ShopApp.Domain.BuyerAggregate.ValueObjects;
-using ShopApp.Domain.Common;
+using ShopApp.Domain.Common.Models;
 using ShopApp.Domain.OrderAggregate.ValueObjects;
 
 namespace ShopApp.Domain.OrderAggregate;

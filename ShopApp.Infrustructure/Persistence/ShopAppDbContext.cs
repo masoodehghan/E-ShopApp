@@ -5,7 +5,7 @@ using ShopApp.Domain.OrderAggregate;
 using ShopApp.Domain.ProductAggregate;
 using ShopApp.Domain.TagAggregate;
 using ShopApp.Domain.UserAggregate;
-using ShopApp.Infrustructure.Configurations;
+using ShopApp.Infrustructure.Persistence.Configurations;
 
 namespace ShopApp.Infrustructure.Persistence;
 
@@ -19,12 +19,12 @@ public class ShopAppDbContext : DbContext
 
 
 
-    DbSet<User> Users { get; set; } = null!;
-    DbSet<Product> Products { get; set; } = null!;
-    DbSet<Category> Categories { get; set; } = null!;
-    DbSet<Tag> Tags { get; set; } = null!;
-    DbSet<Buyer> Buyers { get; set; } = null!;
-    DbSet<Order> Orders { get; set; } = null!;
+    public DbSet<User> Users { get; set; } = null!;
+    public DbSet<Product> Products { get; set; } = null!;
+    public DbSet<Category> Categories { get; set; } = null!;
+    public DbSet<Tag> Tags { get; set; } = null!;
+    public DbSet<Buyer> Buyers { get; set; } = null!;
+    public DbSet<Order> Orders { get; set; } = null!;
     
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)

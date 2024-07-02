@@ -1,4 +1,4 @@
-namespace ShopApp.Domain.Common;
+namespace ShopApp.Domain.Common.Models;
 
 
 public abstract class Entity<TId> : IEquatable<Entity<TId>>
@@ -41,8 +41,8 @@ public abstract class Entity<TId> : IEquatable<Entity<TId>>
 #pragma warning disable CS8618
 
     protected Entity()
-        {
-        }
+    {
+    }
 #pragma warning restore CS8618
 
 

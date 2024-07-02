@@ -1,4 +1,4 @@
-namespace ShopApp.Domain.Common;
+namespace ShopApp.Domain.Common.Models;
 
 public abstract class AggregateRootId<TId> : ValueObject
 {

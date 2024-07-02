@@ -1,4 +1,4 @@
-namespace ShopApp.Domain.Common;
+namespace ShopApp.Domain.Common.Models;
 
 
 public abstract class AggregateRoot<TId, TIdType> : Entity<TId>
@@ -13,10 +13,10 @@ public abstract class AggregateRoot<TId, TIdType> : Entity<TId>
     }
 
 #pragma warning disable CS8618
-    
-        protected AggregateRoot()
-        {
-        }
+
+    protected AggregateRoot()
+    {
+    }
 #pragma warning restore CS8618
 
 

@@ -1,4 +1,4 @@
-using ShopApp.Domain.Common;
+using ShopApp.Domain.Common.Models;
 using ShopApp.Domain.UserAggregate.Enums;
 using ShopApp.Domain.UserAggregate.ValueObjects;
 

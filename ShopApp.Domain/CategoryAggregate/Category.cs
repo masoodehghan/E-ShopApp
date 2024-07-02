@@ -1,5 +1,5 @@
 using ShopApp.Domain.CategoryAggregate.ValueObjects;
-using ShopApp.Domain.Common;
+using ShopApp.Domain.Common.Models;
 using ShopApp.Domain.ProductAggregate.ValueObjects;
 
 namespace ShopApp.Domain.CategoryAggregate;

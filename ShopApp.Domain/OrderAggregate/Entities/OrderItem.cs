@@ -1,4 +1,4 @@
-using ShopApp.Domain.Common;
+using ShopApp.Domain.Common.Models;
 using ShopApp.Domain.OrderAggregate.ValueObjects;
 using ShopApp.Domain.ProductAggregate.ValueObjects;
 

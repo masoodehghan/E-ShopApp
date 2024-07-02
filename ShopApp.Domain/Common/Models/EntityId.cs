@@ -1,9 +1,8 @@
+namespace ShopApp.Domain.Common.Models;
 
-namespace ShopApp.Domain.Common;
-
-public  class EntityId : ValueObject
+public class EntityId : ValueObject
 {
-    public Guid Value { get; private set;}
+    public Guid Value { get; private set; }
 
     protected EntityId(Guid value)
     {
@@ -16,10 +15,10 @@ public  class EntityId : ValueObject
     }
 
 #pragma warning disable CS8618
-    
-        protected EntityId()
-        {
-        }
+
+    protected EntityId()
+    {
+    }
 #pragma warning restore CS8618
 
 
