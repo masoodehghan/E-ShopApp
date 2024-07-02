@@ -5,7 +5,7 @@ using ShopApp.Domain.OrderAggregate.ValueObjects;
 namespace ShopApp.Domain.OrderAggregate;
 
 
-public sealed class Order : AggregateRoot<OrderId>
+public sealed class Order : AggregateRoot<OrderId, Guid>
 {
     public int Number { get; private set; }
 

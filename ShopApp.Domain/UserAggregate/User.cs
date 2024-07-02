@@ -5,7 +5,7 @@ using ShopApp.Domain.UserAggregate.ValueObjects;
 namespace ShopApp.Domain.UserAggregate;
 
 
-public sealed class User : AggregateRoot<UserId>
+public sealed class User : AggregateRoot<UserId, Guid>
 {
     public string FirstName { get; private set; }
 

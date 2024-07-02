@@ -6,7 +6,7 @@ using ShopApp.Domain.UserAggregate.ValueObjects;
 namespace ShopApp.Domain.BuyerAggregate;
 
 
-public sealed class Buyer : AggregateRoot<BuyerId>
+public sealed class Buyer : AggregateRoot<BuyerId, Guid>
 {
     public UserId UserId { get; private set; }
     private readonly List<OrderId> _orderIds = new();

@@ -5,11 +5,14 @@ using ShopApp.Domain.Common;
 namespace ShopApp.Domain.BuyerAggregate.ValueObjects;
 
 
-public class BuyerId : EntityId
+public class BuyerId : AggregateRootId<Guid>
 {
+    public override Guid Value { get; protected set; }
+    private BuyerId(Guid value)
+    {
+        Value = value;
+    }
     
-    private BuyerId(Guid value) : base(value)
-    { }
     public override IEnumerable<object> GetEqualityComponents()
     {
         yield return Value;

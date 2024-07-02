@@ -5,7 +5,7 @@ using ShopApp.Domain.TagAggregate.ValueObjects;
 namespace ShopApp.Domain.TagAggregate;
 
 
-public sealed class Tag : AggregateRoot<TagId>
+public sealed class Tag : AggregateRoot<TagId, Guid>
 {
     public string Name { get; private set; }
 

@@ -3,11 +3,13 @@ using ShopApp.Domain.Common;
 namespace ShopApp.Domain.OrderAggregate.ValueObjects;
 
 
-public class OrderId : EntityId
+public class OrderId : AggregateRootId<Guid>
 {
-    
-    private OrderId(Guid value) : base(value)
-    { }
+    public override Guid Value { get; protected set; }
+    private OrderId(Guid value)
+    {
+        Value = value;
+    }
     public override IEnumerable<object> GetEqualityComponents()
     {
         yield return Value;
