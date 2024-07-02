@@ -4,7 +4,7 @@ using ShopApp.Domain.TagAggregate;
 using ShopApp.Domain.TagAggregate.ValueObjects;
 using ShopApp.Domain.UserAggregate.ValueObjects;
 
-namespace ShopApp.Infrustructure.Configurations;
+namespace ShopApp.Infrustructure.Persistence.Configurations;
 
 
 public class TagConfiguration : IEntityTypeConfiguration<Tag>

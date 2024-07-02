@@ -4,7 +4,7 @@ using ShopApp.Domain.BuyerAggregate;
 using ShopApp.Domain.BuyerAggregate.ValueObjects;
 using ShopApp.Domain.UserAggregate.ValueObjects;
 
-namespace ShopApp.Infrustructure.Configurations;
+namespace ShopApp.Infrustructure.Persistence.Configurations;
 
 
 public class BuyerConfiguration : IEntityTypeConfiguration<Buyer>

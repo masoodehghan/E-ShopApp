@@ -4,7 +4,7 @@ using ShopApp.Domain.CategoryAggregate;
 using ShopApp.Domain.CategoryAggregate.ValueObjects;
 using ShopApp.Domain.UserAggregate.ValueObjects;
 
-namespace ShopApp.Infrustructure.Configurations;
+namespace ShopApp.Infrustructure.Persistence.Configurations;
 
 
 public class CategoryConfiguration : IEntityTypeConfiguration<Category>

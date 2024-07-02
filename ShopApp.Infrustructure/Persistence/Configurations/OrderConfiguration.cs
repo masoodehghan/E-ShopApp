@@ -4,7 +4,7 @@ using ShopApp.Domain.BuyerAggregate.ValueObjects;
 using ShopApp.Domain.OrderAggregate;
 using ShopApp.Domain.OrderAggregate.ValueObjects;
 
-namespace ShopApp.Infrustructure.Configurations;
+namespace ShopApp.Infrustructure.Persistence.Configurations;
 
 
 public class OrderConfiguration : IEntityTypeConfiguration<Order>

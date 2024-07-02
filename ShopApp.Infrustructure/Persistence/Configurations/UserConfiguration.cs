@@ -4,7 +4,7 @@ using ShopApp.Domain.UserAggregate;
 using ShopApp.Domain.UserAggregate.Enums;
 using ShopApp.Domain.UserAggregate.ValueObjects;
 
-namespace ShopApp.Infrustructure.Configurations;
+namespace ShopApp.Infrustructure.Persistence.Configurations;
 
 
 public class UserConfiguration : IEntityTypeConfiguration<User>
