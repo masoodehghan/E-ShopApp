@@ -3,6 +3,7 @@ namespace ShopApp.Application.Authentication.Commands.Register;
 using ErrorOr;
 using MediatR;
 using ShopApp.Application.Authentication.Common;
+using ShopApp.Domain.UserAggregate.Enums;
 
 public record RegisterCommand(
     string FirstName,
@@ -10,6 +11,7 @@ public record RegisterCommand(
     string LastName,
     string Email,
     string Password,
-    long? PhoneNumber
+    long? PhoneNumber,
+    Roles Role = Roles.Buyer
 ) : IRequest<ErrorOr<AuthResult>>;
 

@@ -1,3 +1,5 @@
+using ShopApp.Api;
+using ShopApp.Application.Services;
 using ShopApp.Infrustructure;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -7,8 +9,11 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddInfrustructure(builder.Configuration);
-
+builder.Services
+            .AddInfrustructure(builder.Configuration)
+            .AddPresentaion()
+            .AddApplication();
+            
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -18,6 +23,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+app.MapControllers();
 app.UseHttpsRedirection();
 
 

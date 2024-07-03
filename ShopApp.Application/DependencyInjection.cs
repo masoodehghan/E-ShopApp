@@ -1,15 +1,10 @@
-
-using System.Reflection;
-// using ShopApp.Application.Authentication.Commands;
-// using ShopApp.Application.Authentication.Commands.Register;
-// using ShopApp.Application.Authentication.Common;
-// using ShopApp.Application.Authentication.Queries.Login;
 using ShopApp.Application.Common.Behaviors;
 // using ErrorOr;
 using FluentValidation;
 using MediatR;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;
+using ShopApp.Application.Authentication.Commands.Register;
+using System.Reflection;
 
 namespace ShopApp.Application.Services;
 
@@ -20,15 +15,18 @@ public static class DependencyInjection
     {
         
         
-        // var assemblies = new[]
-        // {
-        //     typeof(RegisterCommandValidtor).Assembly,
-        //     typeof(LoginQueryValidation).Assembly
-        // };
+        var assemblies = new[]
+        {
+            typeof(RegisterCommandValidator).Assembly,
+            // typeof(LoginQueryValidation).Assembly
+        };
 
-        // services.AddValidatorsFromAssemblies(assemblies, ServiceLifetime.Scoped);
+        services.AddValidatorsFromAssemblies(assemblies, ServiceLifetime.Scoped);
         services.AddScoped(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
-        services.AddMediatR(typeof(DependencyInjection).Assembly);
+        services.AddMediatR(cfg => {
+            cfg.RegisterServicesFromAssemblies(Assembly.GetExecutingAssembly());
+        });
+
         return services;
     }
 }

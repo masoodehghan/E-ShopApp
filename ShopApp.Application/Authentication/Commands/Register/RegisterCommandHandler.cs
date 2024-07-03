@@ -5,6 +5,7 @@ using ShopApp.Application.Authentication.Common;
 using ShopApp.Application.Common.Interfaces.Authentication;
 using ShopApp.Application.Common.Interfaces.Persistence;
 using ShopApp.Domain.UserAggregate;
+using ShopApp.Domain.UserAggregate.Enums;
 
 namespace ShopApp.Application.Authentication.Commands.Register;
 
@@ -27,7 +28,7 @@ public class RegisterCommandHandler : IRequestHandler<RegisterCommand, ErrorOr<A
         RegisterCommand request,
         CancellationToken cancellationToken)
     {
-        if(await _userRepository.GetUserByEmail(request.Email) is null)
+        if(await _userRepository.GetUserByEmail(request.Email) is not null)
         {
             return Errors.Authentication.DuplicateEmail;
         }
@@ -36,9 +37,10 @@ public class RegisterCommandHandler : IRequestHandler<RegisterCommand, ErrorOr<A
             request.FirstName,
             request.LastName,
             request.Email,
-            request.Password,
+            request.Password, //TODO hash password
             request.Username,
-            request.PhoneNumber
+            request.PhoneNumber,
+            request.Role
         );
 
         await _userRepository.Add(user);

@@ -24,6 +24,7 @@ namespace ShopApp.Infrastructure.Authentication
 
         public string GenerateToken(User user)
         {
+            Console.WriteLine("ASDIAJOFIJOI", _jwtSettings.Secrets);
             var singingCredentials = new SigningCredentials(
                 new SymmetricSecurityKey(
                     Encoding.UTF8.GetBytes(_jwtSettings.Secrets!)),
@@ -33,7 +34,7 @@ namespace ShopApp.Infrastructure.Authentication
                 new Claim(JwtRegisteredClaimNames.GivenName, user.FirstName!),
                 new Claim(JwtRegisteredClaimNames.FamilyName, user.LastName!),
                 new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
-                new Claim(JwtRegisteredClaimNames.Sub, user.Id.ToString())
+                new Claim(JwtRegisteredClaimNames.Sub, user.Id.Value.ToString())
             };
 
             var keys = new JwtSecurityToken(

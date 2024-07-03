@@ -25,7 +25,8 @@ public sealed class User : AggregateRoot<UserId, Guid>
         string email,
         string hashedPassword,
         string username,
-        long? phoneNumber)
+        long? phoneNumber,
+        Roles role)
     {
         Id = id;
         FirstName = firstName;
@@ -34,6 +35,7 @@ public sealed class User : AggregateRoot<UserId, Guid>
         HashedPassword = hashedPassword;
         Username = username;
         PhoneNumber = phoneNumber;
+        Role = role;
     }
 
     public static User Create(
@@ -42,7 +44,8 @@ public sealed class User : AggregateRoot<UserId, Guid>
         string email,
         string hashedPassword,
         string username,
-        long? phoneNumber)
+        long? phoneNumber,
+        Roles role = Roles.Buyer)
     {
         return new(
             UserId.CreateUnique(),
@@ -51,7 +54,8 @@ public sealed class User : AggregateRoot<UserId, Guid>
             email,
             hashedPassword,
             username,
-            phoneNumber
+            phoneNumber,
+            role
         );
     }
 

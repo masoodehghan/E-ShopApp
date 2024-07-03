@@ -1,13 +1,20 @@
 using System.Text;
+using BubberDinner.Infrastructure.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using ShopApp.Application.Common.Interfaces.Authentication;
+using ShopApp.Application.Common.Interfaces.Persistence;
+using ShopApp.Application.Common.Interfaces.Services;
+using ShopApp.Domain.UserAggregate;
 using ShopApp.Infrastructure.Authentication;
+using ShopApp.Infrustructure.Authentication;
 using ShopApp.Infrustructure.Persistence;
+using ShopApp.Infrustructure.Persistence.Repositories;
 
 namespace ShopApp.Infrustructure;
 
@@ -19,7 +26,8 @@ public static class DependencyInjection
         IConfiguration configuration)
     {
         AddPersistence(services, configuration);
-
+        AddAuth(services, configuration);
+        services.AddSingleton<IDateTimeProvider, DateTimeProvider>();
         return services;
     }
 
@@ -28,6 +36,7 @@ public static class DependencyInjection
         IConfiguration configuration
     )
     {
+        services.AddScoped<IUserRepository, UserRepository>();
         services.AddDbContext<ShopAppDbContext>(
             options => options.UseSqlite(configuration.GetConnectionString("DefaultConnection"))
         );
@@ -41,6 +50,10 @@ public static class DependencyInjection
         IConfiguration configuration
     )
     {
+        var superUserSecret = new SuperUserSecret();
+        configuration.Bind(SuperUserSecret.SectionName, superUserSecret);
+        services.AddSingleton(superUserSecret);
+
         var jwtSettings = new JwtSettings();
         configuration.Bind(JwtSettings.SectionName, jwtSettings);
         services.AddSingleton(Options.Create(jwtSettings));

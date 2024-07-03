@@ -22,7 +22,7 @@ public class UserRepository : IUserRepository
 
     public async Task<User?> GetUserByEmail(string email)
     {
-        return  await _context.Users.SingleOrDefaultAsync();
+        return  await _context.Users.SingleOrDefaultAsync(e => e.Email == email);
     }
 }
 
