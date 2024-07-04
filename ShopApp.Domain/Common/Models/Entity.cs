@@ -1,11 +1,14 @@
+
 namespace ShopApp.Domain.Common.Models;
 
 
-public abstract class Entity<TId> : IEquatable<Entity<TId>>
+public abstract class Entity<TId> : IEquatable<Entity<TId>>, IHasDomainEvents
     where TId : notnull
 {
 
     public TId Id { get; protected set; }
+
+    private readonly List<IDomainEvent> _domainEvent = new();
 
     protected Entity(TId id)
     {
@@ -36,6 +39,18 @@ public abstract class Entity<TId> : IEquatable<Entity<TId>>
     {
         return Equals((object?)other);
     }
+
+    public void ClearDomainEvents()
+    {
+        _domainEvent.Clear();
+    }
+
+    public void AddDomainEvents(IDomainEvent domainEvent)
+    {
+        _domainEvent.Add(domainEvent);
+    }
+
+    public IReadOnlyList<IDomainEvent> DomainEvents => _domainEvent.AsReadOnly();
 
 
 #pragma warning disable CS8618
