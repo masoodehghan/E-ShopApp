@@ -5,7 +5,9 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using ShopApp.Application.Authentication.Commands.Register;
 using ShopApp.Application.Authentication.Common;
+using ShopApp.Application.Authentication.Queries.Login;
 using ShopApp.Contracts.Authentication;
+using ShopApp.Domain.Common.Errors;
 using ShopApp.Infrustructure.Authentication;
 
 namespace ShopApp.Api.Controllers;
@@ -26,8 +28,7 @@ public class AuthenticationController : ApiController
     }
 
 
-    [HttpPost]
-    [Route("register")]
+    [HttpPost("register")]
     [AllowAnonymous]
     public async Task<IActionResult> Register(RegisterRequest request)
     {
@@ -40,8 +41,7 @@ public class AuthenticationController : ApiController
         );
     }
 
-    [HttpPost]
-    [Route("secret")]
+    [HttpPost("secret")]
     [AllowAnonymous ]
     public async Task<IActionResult> CreateSuperUser(CreateSuperUserRequest request)
     {
@@ -55,6 +55,28 @@ public class AuthenticationController : ApiController
         ErrorOr<AuthResult> result = await _mediator.Send(command);
 
         return result.Match(
+            authResult => Ok(_mapper.Map<AuthResponse>(authResult)),
+            errors => Problem(errors)
+        );
+    }
+
+    [HttpPost("login")]
+    [AllowAnonymous]
+    public async Task<IActionResult> Login(LoginRequest request)
+    {
+
+        var query = _mapper.Map<LoginQuery>(request);
+        var AuthResult = await _mediator.Send(query);
+
+        if (AuthResult.IsError && AuthResult.FirstError == Errors.Authentication.InvalidCredentials)
+        {
+            return Problem(
+                statusCode: StatusCodes.Status401Unauthorized,
+                title: AuthResult.FirstError.Description
+                );
+        }
+
+        return AuthResult.Match(
             authResult => Ok(_mapper.Map<AuthResponse>(authResult)),
             errors => Problem(errors)
         );

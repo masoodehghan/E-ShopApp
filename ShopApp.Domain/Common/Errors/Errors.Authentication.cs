@@ -1,6 +1,6 @@
 using ErrorOr;
 
-namespace BubberDinner.Domain.Common.Errors;
+namespace ShopApp.Domain.Common.Errors;
 
 public static partial class Errors
 {

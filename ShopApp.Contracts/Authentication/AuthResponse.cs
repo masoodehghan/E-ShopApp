@@ -7,5 +7,6 @@ public record AuthResponse(
     string Username,
     string LastName,
     string Email,
-    long? PhoneNumber
+    long? PhoneNumber,
+    string Token
 );

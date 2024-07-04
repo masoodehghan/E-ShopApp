@@ -15,6 +15,7 @@ public class AuthenticationMappingConfig : IRegister
                 .Map(dest => dest.Role, src => Roles.SuperAdmin);
         config.NewConfig<AuthResult, AuthResponse>()
                     .Map(dest => dest, src => src.User)
+                    .Map(dest => dest, src => src.Token)
                     .Map(dest => dest.Id, src => src.User.Id.Value.ToString());
     }
 }

@@ -1,10 +1,10 @@
-using BubberDinner.Domain.Common.Errors;
 using ErrorOr;
 using MediatR;
 using ShopApp.Application.Authentication.Common;
 using ShopApp.Application.Common.Interfaces.Authentication;
 using ShopApp.Application.Common.Interfaces.Persistence;
 using ShopApp.Domain.UserAggregate;
+using ShopApp.Domain.Common.Errors;
 using ShopApp.Domain.UserAggregate.Enums;
 
 namespace ShopApp.Application.Authentication.Commands.Register;

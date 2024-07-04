@@ -13,11 +13,12 @@ public sealed class Category : AggregateRoot<CategoryId, Guid>
 
     public Category(CategoryId id, string name, List<ProductId> productIds)
     {
+        Id = id;
         Name = name;
         _productIds = productIds;
     }
 
-    public static Category Create(string name, List<ProductId>? productIds)
+    public static Category Create(string name, List<ProductId>? productIds = null)
     {
         return new(CategoryId.CreateUnique(), name, productIds ?? new());
     }
