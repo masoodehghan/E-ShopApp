@@ -37,6 +37,8 @@ public static class DependencyInjection
     )
     {
         services.AddScoped<IUserRepository, UserRepository>();
+        services.AddScoped<ICategoryRepository, CategoryRepository>();
+
         services.AddDbContext<ShopAppDbContext>(
             options => options.UseSqlite(configuration.GetConnectionString("DefaultConnection"))
         );
@@ -59,7 +61,14 @@ public static class DependencyInjection
         services.AddSingleton(Options.Create(jwtSettings));
         services.AddSingleton<IJwtTokenGenerator, JwtTokenGenerator>();
 
-        services.AddAuthentication(defaultScheme: JwtBearerDefaults.AuthenticationScheme)
+        services.AddIdentity<IdentityUser, IdentityRole>()
+                    .AddEntityFrameworkStores<ShopAppDbContext>();
+
+        services.AddAuthentication(options => 
+        {
+            options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+            options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+        })
             .AddJwtBearer(options => options.TokenValidationParameters = new TokenValidationParameters()
             {
                 ValidateIssuer = true,

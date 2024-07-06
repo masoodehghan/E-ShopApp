@@ -3,6 +3,9 @@ using ErrorOr;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
+using ShopApp.Domain.UserAggregate;
+using ShopApp.Application.Common.Interfaces.Persistence;
+using System.Security.Claims;
 
 namespace ShopApp.Api.Controllers;
 
@@ -35,6 +38,7 @@ public class ApiController : ControllerBase
             ErrorType.Conflict => StatusCodes.Status409Conflict,
             ErrorType.NotFound => StatusCodes.Status404NotFound,
             ErrorType.Validation => StatusCodes.Status400BadRequest,
+            ErrorType.Forbidden => StatusCodes.Status403Forbidden,
             _ => StatusCodes.Status500InternalServerError
         };
 
@@ -55,4 +59,6 @@ public class ApiController : ControllerBase
 
         return ValidationProblem(modelStateDictionary);
     }
+
+    
 }

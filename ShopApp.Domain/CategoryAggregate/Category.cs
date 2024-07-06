@@ -1,3 +1,4 @@
+using ShopApp.Domain.CategoryAggregate.Events;
 using ShopApp.Domain.CategoryAggregate.ValueObjects;
 using ShopApp.Domain.Common.Models;
 using ShopApp.Domain.ProductAggregate.ValueObjects;
@@ -20,7 +21,10 @@ public sealed class Category : AggregateRoot<CategoryId, Guid>
 
     public static Category Create(string name, List<ProductId>? productIds = null)
     {
-        return new(CategoryId.CreateUnique(), name, productIds ?? new());
+        Category category =  new(CategoryId.CreateUnique(), name, productIds ?? new());
+        category.AddDomainEvents(new CategoryCreated(category));
+
+        return category;
     }
 
     #pragma warning disable CS8618
