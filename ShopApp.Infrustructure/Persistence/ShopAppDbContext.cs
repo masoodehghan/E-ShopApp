@@ -5,6 +5,7 @@ using ShopApp.Domain.OrderAggregate;
 using ShopApp.Domain.ProductAggregate;
 using ShopApp.Domain.TagAggregate;
 using ShopApp.Domain.UserAggregate;
+using ShopApp.Infrastructure.Persistence.Interceptors;
 using ShopApp.Infrustructure.Persistence.Configurations;
 
 namespace ShopApp.Infrustructure.Persistence;
@@ -12,12 +13,14 @@ namespace ShopApp.Infrustructure.Persistence;
 
 public class ShopAppDbContext : DbContext
 {
+    private readonly PublishDomainEventsInterceptor _publishDomain;
+
     public ShopAppDbContext(
         DbContextOptions<ShopAppDbContext> options
-    ) : base(options)
-    { }
-
-
+, PublishDomainEventsInterceptor publishDomain) : base(options)
+    {
+        _publishDomain = publishDomain;
+    }
 
     public DbSet<User> Users { get; set; } = null!;
     public DbSet<Product> Products { get; set; } = null!;
@@ -33,5 +36,11 @@ public class ShopAppDbContext : DbContext
             typeof(ShopAppDbContext).Assembly
         );
         base.OnModelCreating(modelBuilder);
+    }
+
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+    {
+        optionsBuilder.AddInterceptors(_publishDomain);
+        base.OnConfiguring(optionsBuilder);
     }
 }

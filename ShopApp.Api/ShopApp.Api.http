@@ -1,5 +1,5 @@
 @host = http://localhost:5256
-@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJnaXZlbl9uYW1lIjoiYWxpIiwiZmFtaWx5X25hbWUiOiJhZGYiLCJqdGkiOiIyYmYyNDMzZi1kYjU1LTRmZTMtODEyZC1hZmIyMDViN2NjODMiLCJzdWIiOiIzOTRlMmQ4MC0yZmQwLTQ2NTgtYjllYi0xODU4MGZmZTgzOTIiLCJleHAiOjE3MjAxOTgyMjQsImlzcyI6InNob3AiLCJhdWQiOiJhbGkifQ.vYyGH-P0kQXGyk-NBZe8bH37mAwnV-SIHwhtUznmQsM
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJnaXZlbl9uYW1lIjoic3RyaW5nIiwiZmFtaWx5X25hbWUiOiJzdHJpbmciLCJqdGkiOiI0MTFhMmIxZi1mMzZkLTRlYTUtYWMyYi1hZTczMjhjYjYyOGIiLCJzdWIiOiI1YTY0OGMwNy1lYmFhLTRiZGQtYjY0Yi1hOWU0YWE1MDE3ZDMiLCJleHAiOjE3MjAyOTQxMDMsImlzcyI6InNob3AiLCJhdWQiOiJhbGkifQ.fHz1cB7xV2GfEx1ZRJ7_y4lSLeyTkg3L5gBzjO6uZ-o
 
 Post {{host}}/api/auth/register
 Accept: application/json
@@ -41,3 +41,19 @@ Authorization: Bearer {{token}}
 GET {{host}}/api/dashboard/category
 Accept: application/json
 Content-Type: application/json
+
+###
+
+Post {{host}}/api/dashboard/product
+Accept: application/json
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+    "name": "prweij",
+    "quantity": 1,
+    "price": 1432.00,
+    "categoryId": "7f44209d-3fbf-41cd-a285-cd6786a99db7",
+    "desciption": "lorem ipsum"
+}
+

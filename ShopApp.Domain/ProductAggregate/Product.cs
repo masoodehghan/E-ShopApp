@@ -1,6 +1,7 @@
 using ShopApp.Domain.CategoryAggregate.ValueObjects;
 using ShopApp.Domain.Common.Models;
 using ShopApp.Domain.OrderAggregate.ValueObjects;
+using ShopApp.Domain.ProductAggregate.Events;
 using ShopApp.Domain.ProductAggregate.ValueObjects;
 using ShopApp.Domain.TagAggregate.ValueObjects;
 
@@ -50,10 +51,10 @@ public sealed class Product : AggregateRoot<ProductId, Guid>
         int quantity,
         string? description,
         CategoryId categoryId,
-        List<OrderItemId>? orderItemIds,
-        List<TagId>? tagIds)
+        List<OrderItemId>? orderItemIds = null,
+        List<TagId>? tagIds = null)
     {
-        return new(
+        Product product = new(
             ProductId.CreateUnique(),
             name,
             price,
@@ -63,6 +64,10 @@ public sealed class Product : AggregateRoot<ProductId, Guid>
             orderItemIds ?? new(),
             tagIds ?? new()
         );
+
+        product.AddDomainEvents(new ProductCreated(product));
+
+        return product;
     }
 
     #pragma warning disable CS8618

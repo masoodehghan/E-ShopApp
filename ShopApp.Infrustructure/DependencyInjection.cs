@@ -12,6 +12,7 @@ using ShopApp.Application.Common.Interfaces.Persistence;
 using ShopApp.Application.Common.Interfaces.Services;
 using ShopApp.Domain.UserAggregate;
 using ShopApp.Infrastructure.Authentication;
+using ShopApp.Infrastructure.Persistence.Interceptors;
 using ShopApp.Infrustructure.Authentication;
 using ShopApp.Infrustructure.Persistence;
 using ShopApp.Infrustructure.Persistence.Repositories;
@@ -38,6 +39,8 @@ public static class DependencyInjection
     {
         services.AddScoped<IUserRepository, UserRepository>();
         services.AddScoped<ICategoryRepository, CategoryRepository>();
+        services.AddScoped<IProductRepository, ProductRepository>();
+        services.AddScoped<PublishDomainEventsInterceptor>();
 
         services.AddDbContext<ShopAppDbContext>(
             options => options.UseSqlite(configuration.GetConnectionString("DefaultConnection"))
