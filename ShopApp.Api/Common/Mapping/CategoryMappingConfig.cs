@@ -14,7 +14,9 @@ public class CategoryMappingConfig : IRegister
         config.NewConfig<(CategoryRequest, ClaimsPrincipal), CategoryCommand>()
                 .Map(dest => dest.User, src => src.Item2)
                 .Map(dest => dest, src => src.Item1);
+            
         config.NewConfig<Category, CategoryResponse>()
-                .Map(dest => dest.Id, src => src.Id.Value.ToString());
+                .Map(dest => dest.Id, src => src.Id.Value.ToString())
+                .Map(dest => dest.ProductIds, src => src.ProductIds.Select(g => g.Value.ToString()).ToList());
     }
 }

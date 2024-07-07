@@ -27,6 +27,17 @@ public sealed class Category : AggregateRoot<CategoryId, Guid>
         return category;
     }
 
+    public void AddProductIds(List<ProductId> productIds)
+    {
+        _productIds.AddRange(productIds);
+    }
+
+    public void AddProductId(ProductId productId)
+    {
+        _productIds.Add(productId);
+    }
+
+
     #pragma warning disable CS8618
 
     private Category()
