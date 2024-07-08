@@ -1,6 +1,8 @@
+using ErrorOr;
 using MediatR;
 using ShopApp.Application.Common.Interfaces.Persistence;
 using ShopApp.Domain.CategoryAggregate;
+using ShopApp.Domain.Common.Errors;
 using ShopApp.Domain.ProductAggregate.Events;
 using ShopApp.Domain.ProductAggregate.ValueObjects;
 

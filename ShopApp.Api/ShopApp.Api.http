@@ -1,5 +1,5 @@
 @host = http://localhost:5256
-@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJnaXZlbl9uYW1lIjoic3RyaW5nIiwiZmFtaWx5X25hbWUiOiJzdHJpbmciLCJqdGkiOiJiYTdhMTU3MC05MGFhLTQ0YzItYTRkZi0zOTg0NmY4NGUyZDAiLCJzdWIiOiI1YTY0OGMwNy1lYmFhLTRiZGQtYjY0Yi1hOWU0YWE1MDE3ZDMiLCJleHAiOjE3MjAzMDExMDAsImlzcyI6InNob3AiLCJhdWQiOiJhbGkifQ.HGFzRqP0LYsrDqxzf_Bkkf4GW64DTkT6soE_wVzKDTE
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJnaXZlbl9uYW1lIjoic3RyaW5nIiwiZmFtaWx5X25hbWUiOiJzdHJpbmciLCJqdGkiOiI5MmE2MjkzZi03MTgzLTQ2Y2EtODJmZC02OTZlNmY3NmU3NTIiLCJzdWIiOiI1YTY0OGMwNy1lYmFhLTRiZGQtYjY0Yi1hOWU0YWE1MDE3ZDMiLCJleHAiOjE3MjAzODYxMDIsImlzcyI6InNob3AiLCJhdWQiOiJhbGkifQ.sBHsKKuLi0d9R998Gzvc071a-DS-eCldMZ4mMQU1NY0
 
 Post {{host}}/api/auth/register
 Accept: application/json
@@ -50,10 +50,10 @@ Content-Type: application/json
 Authorization: Bearer {{token}}
 
 {
-    "name": "sadf",
+    "name": "awdfdsf",
     "quantity": 1,
     "price": 1432.00,
-    "categoryId": "7f44209d-3fbf-41cd-a285-cd6786a99db7",
+    "categoryId": "f252b52c-adc2-48fd-b02a-4651cb505b6b",
     "desciption": "lorem ipsum"
 }
 

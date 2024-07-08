@@ -24,7 +24,6 @@ namespace ShopApp.Infrastructure.Authentication
 
         public string GenerateToken(User user)
         {
-            Console.WriteLine("ASDIAJOFIJOI", _jwtSettings.Secrets);
             var singingCredentials = new SigningCredentials(
                 new SymmetricSecurityKey(
                     Encoding.UTF8.GetBytes(_jwtSettings.Secrets!)),

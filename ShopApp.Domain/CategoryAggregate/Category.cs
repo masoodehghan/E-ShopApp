@@ -27,6 +27,12 @@ public sealed class Category : AggregateRoot<CategoryId, Guid>
         return category;
     }
 
+    public static Category Update(Category category, string? name = null)
+    {
+        category.Name = name ?? category.Name;
+        return category;
+    }
+
     public void AddProductIds(List<ProductId> productIds)
     {
         _productIds.AddRange(productIds);

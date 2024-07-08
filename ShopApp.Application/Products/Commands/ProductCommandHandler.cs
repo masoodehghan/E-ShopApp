@@ -16,12 +16,18 @@ public class ProductCommandHandler : IRequestHandler<ProductCommand, ErrorOr<Pro
 
     private readonly IUserRepository _userRepository;
     private readonly IProductRepository _productRepository;
+    private readonly ICategoryRepository _categoryRepository;
 
-    public ProductCommandHandler(UserManager<IdentityUser> userManager, IUserRepository userRepository, IProductRepository productRepository)
+    public ProductCommandHandler(
+        UserManager<IdentityUser> userManager,
+        IUserRepository userRepository,
+        IProductRepository productRepository,
+        ICategoryRepository categoryRepository)
     {
         _userManager = userManager;
         _userRepository = userRepository;
         _productRepository = productRepository;
+        _categoryRepository = categoryRepository;
     }
 
 
@@ -34,13 +40,20 @@ public class ProductCommandHandler : IRequestHandler<ProductCommand, ErrorOr<Pro
         {
             return Errors.Authentication.Forbidden;
         }
+        CategoryId categoryId = CategoryId.Create(request.CategoryId);
+
+
+        if(await _categoryRepository.GetById(categoryId) is null)
+        {
+            return Errors.Category.NotFound;
+        }
 
         var product = Product.Create(
             request.Name,
             request.Price,
             request.Quantity,
             request.Description,
-            CategoryId.Create(request.CategoryId));
+            categoryId);
 
         await _productRepository.Add(product);
 
