@@ -15,7 +15,6 @@ public class ProductMappingConfig : IRegister
     {
         config.NewConfig<(ProductCreateRequest, ClaimsPrincipal), ProductCommand>()
                     .Map(dest => dest.User, src => src.Item2)
-                    .Map(dest => dest.CategoryId, src => Guid.Parse(src.Item1.CategoryId))
                     .Map(dest => dest, src => src.Item1); 
         
         config.NewConfig<Product, ProductResponse>()

@@ -11,4 +11,6 @@ public interface ICategoryRepository
     Task<List<Category>> GetAll();
 
     Task<Category?> GetById(CategoryId id);
+
+    Task Update(Category category);
 }

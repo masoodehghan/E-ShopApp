@@ -1,5 +1,5 @@
 @host = http://localhost:5256
-@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJnaXZlbl9uYW1lIjoic3RyaW5nIiwiZmFtaWx5X25hbWUiOiJzdHJpbmciLCJqdGkiOiI5MmE2MjkzZi03MTgzLTQ2Y2EtODJmZC02OTZlNmY3NmU3NTIiLCJzdWIiOiI1YTY0OGMwNy1lYmFhLTRiZGQtYjY0Yi1hOWU0YWE1MDE3ZDMiLCJleHAiOjE3MjAzODYxMDIsImlzcyI6InNob3AiLCJhdWQiOiJhbGkifQ.sBHsKKuLi0d9R998Gzvc071a-DS-eCldMZ4mMQU1NY0
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJnaXZlbl9uYW1lIjoic3RyaW5nIiwiZmFtaWx5X25hbWUiOiJzdHJpbmciLCJqdGkiOiI0NTFiMjVkMC1lMWM2LTQ2MjUtYjFiZi0xMjg3NTcxMmE1OWUiLCJzdWIiOiI1YTY0OGMwNy1lYmFhLTRiZGQtYjY0Yi1hOWU0YWE1MDE3ZDMiLCJleHAiOjE3MjA0NjEzNjUsImlzcyI6InNob3AiLCJhdWQiOiJhbGkifQ.L5ZeQn27oOWoZ6nrVPJ85n9_8vDxolK4l8BE0ptybTk
 
 Post {{host}}/api/auth/register
 Accept: application/json
@@ -35,6 +35,17 @@ Authorization: Bearer {{token}}
     "name": "fvfssfd"
 }
 
+###
+
+PUT {{host}}/api/dashboard/category
+Accept: application/json
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+    "Id": "169b70a6-5f15-4c83-a3b7-a5c276fadadc",
+    "name": "modified name"
+}
 
 ###
 

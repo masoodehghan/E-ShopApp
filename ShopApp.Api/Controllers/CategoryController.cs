@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using ShopApp.Application.Categories.Commands;
+using ShopApp.Application.Categories.Queries;
 using ShopApp.Application.Common.Interfaces.Persistence;
 using ShopApp.Contracts.Categories;
 using ShopApp.Domain.UserAggregate;
@@ -45,6 +46,19 @@ public class CategoryController : ApiController
     {
         var categories = await _categoryRepository.GetAll();
         return Ok(_mapper.Map<List<CategoryResponse>>(categories));
+    }
+
+    [HttpPut]
+    public async Task<IActionResult> Put(CategoryUpdateRequest request)
+    {
+        var query = _mapper.Map<CategoryUpdateQuery>((request, User));
+
+        var result = await _mediatr.Send(query);
+
+        return result.Match(
+            category => Ok(_mapper.Map<CategoryResponse>(category)),
+            errors => Problem(errors)
+        );
     }
 
     

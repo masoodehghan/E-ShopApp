@@ -6,6 +6,7 @@ using ShopApp.Domain.ProductAggregate;
 using ShopApp.Domain.UserAggregate.Enums;
 using ShopApp.Domain.Common.Errors;
 using ShopApp.Domain.CategoryAggregate.ValueObjects;
+using ShopApp.Domain.CategoryAggregate;
 
 namespace ShopApp.Application.Products.Commands;
 
@@ -40,7 +41,13 @@ public class ProductCommandHandler : IRequestHandler<ProductCommand, ErrorOr<Pro
         {
             return Errors.Authentication.Forbidden;
         }
-        CategoryId categoryId = CategoryId.Create(request.CategoryId);
+
+        if(!Guid.TryParse(request.CategoryId, out Guid categoryIdGuid))
+        {
+            return Errors.Category.NotFound;
+        }
+
+        CategoryId categoryId = CategoryId.Create(categoryIdGuid);
 
 
         if(await _categoryRepository.GetById(categoryId) is null)

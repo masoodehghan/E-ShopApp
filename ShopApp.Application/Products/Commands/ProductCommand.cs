@@ -11,7 +11,7 @@ namespace ShopApp.Application.Products.Commands;
 public record ProductCommand(
     string Name,
     int Quantity,
-    Guid CategoryId,
+    string CategoryId,
     float Price,
     string Description,
     ClaimsPrincipal User

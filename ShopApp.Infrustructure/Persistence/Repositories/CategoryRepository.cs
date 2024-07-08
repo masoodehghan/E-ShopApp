@@ -31,4 +31,10 @@ public class CategoryRepository : ICategoryRepository
         return await _context.Categories.SingleOrDefaultAsync(c => c.Id == id);
     }
 
+    public async Task Update(Category category)
+    {
+       _context.Update(category);
+       await _context.SaveChangesAsync();
+
+    }
 }
