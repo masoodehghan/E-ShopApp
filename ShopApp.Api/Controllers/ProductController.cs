@@ -2,6 +2,7 @@ using MapsterMapper;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using ShopApp.Application.Products.Commands;
+using ShopApp.Application.Products.Queries;
 using ShopApp.Contracts.Products;
 
 namespace ShopApp.Api.Controllers;
@@ -29,6 +30,18 @@ public class ProductController : ApiController
 
         return result.Match(
             product => Created("", _mapper.Map<ProductResponse>(product)),
+            errors => Problem(errors)
+        );
+    }
+
+    [HttpPut]
+    public async Task<IActionResult> Put(ProductUpdateRequest request)
+    {
+        var query = _mapper.Map<ProductUpdateQuery>((request, User));
+        var result = await _mediatr.Send(query);
+
+        return result.Match(
+            product => Ok(_mapper.Map<ProductResponse>(product)),
             errors => Problem(errors)
         );
     }

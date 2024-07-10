@@ -1,5 +1,5 @@
 @host = http://localhost:5256
-@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJnaXZlbl9uYW1lIjoic3RyaW5nIiwiZmFtaWx5X25hbWUiOiJzdHJpbmciLCJqdGkiOiI0NTFiMjVkMC1lMWM2LTQ2MjUtYjFiZi0xMjg3NTcxMmE1OWUiLCJzdWIiOiI1YTY0OGMwNy1lYmFhLTRiZGQtYjY0Yi1hOWU0YWE1MDE3ZDMiLCJleHAiOjE3MjA0NjEzNjUsImlzcyI6InNob3AiLCJhdWQiOiJhbGkifQ.L5ZeQn27oOWoZ6nrVPJ85n9_8vDxolK4l8BE0ptybTk
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJnaXZlbl9uYW1lIjoic3RyaW5nIiwiZmFtaWx5X25hbWUiOiJzdHJpbmciLCJqdGkiOiJhMDhiZDBmOS04ODRhLTQzNWItYTBkZi00MjlkM2Q2ZjA3YzMiLCJzdWIiOiI1YTY0OGMwNy1lYmFhLTRiZGQtYjY0Yi1hOWU0YWE1MDE3ZDMiLCJleHAiOjE3MjA2MjIyMzQsImlzcyI6InNob3AiLCJhdWQiOiJhbGkifQ._h5bqDcOF2fMAM_P-pQHpulLpOJg2wzpdrhclgYZiGs
 
 Post {{host}}/api/auth/register
 Accept: application/json
@@ -68,3 +68,18 @@ Authorization: Bearer {{token}}
     "desciption": "lorem ipsum"
 }
 
+
+###
+
+Put {{host}}/api/dashboard/product
+Accept: application/json
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+    "id": "024378CA-09B1-4B06-B018-8862E5F6FA59",
+    "name": "ewr",
+    "quantity": 10,
+    "price": 84.00,
+    "categoryId": "f252b5dc-adc2-48fd-b02a-4651cb505b6b"
+}

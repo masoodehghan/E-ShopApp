@@ -70,6 +70,27 @@ public sealed class Product : AggregateRoot<ProductId, Guid>
         return product;
     }
 
+
+    public static Product Update(
+        Product product,
+        string? name = null,
+        float? price = null,
+        CategoryId? categoryId = null,
+        int? quantity = null,
+        string? description = null)
+    
+    {
+        product.Price = price ?? product.Price;
+        product.Name = name ?? product.Name;
+        product.CategoryId = categoryId ?? product.CategoryId;
+        product.Quantity = quantity ?? product.Quantity;
+        product.Description = description ?? product.Description;
+
+        product.AddDomainEvents(new ProductUpdated(product));
+        
+        return product;
+    }
+
     #pragma warning disable CS8618
 
     private Product()

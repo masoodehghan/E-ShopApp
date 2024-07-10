@@ -40,7 +40,11 @@ public sealed class Category : AggregateRoot<CategoryId, Guid>
 
     public void AddProductId(ProductId productId)
     {
-        _productIds.Add(productId);
+        if(!_productIds.Contains(productId))
+        {
+            _productIds.Add(productId);
+        }
+        
     }
 
 
