@@ -11,5 +11,8 @@ public interface IProductRepository
     Task<Product?> GetById(ProductId id);
 
     Task Update(Product product);
+
+    Task Delete(Product product);
+    Task<List<Product>> GetAll();
 }
 

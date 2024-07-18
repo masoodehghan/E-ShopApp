@@ -25,5 +25,9 @@ public class ProductMappingConfig : IRegister
         config.NewConfig<(ProductUpdateRequest, ClaimsPrincipal), ProductUpdateQuery>()
                     .Map(dest => dest.User, src => src.Item2)
                     .Map(dest => dest, src => src.Item1);
+
+        config.NewConfig<(ProductDeleteRequest, ClaimsPrincipal), ProductDeleteQuery>()
+                        .Map(dest => dest.User, src => src.Item2)
+                        .Map(dest => dest.Id, src => src.Item1.Id);
     }
 }

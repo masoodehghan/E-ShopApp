@@ -7,25 +7,23 @@ using ShopApp.Domain.UserAggregate.Enums;
 using ShopApp.Domain.Common.Errors;
 using ShopApp.Domain.CategoryAggregate.ValueObjects;
 using ShopApp.Domain.CategoryAggregate;
+using ShopApp.Domain.ProductAggregate.ValueObjects;
 
 namespace ShopApp.Application.Products.Commands;
 
 
 public class ProductCommandHandler : IRequestHandler<ProductCommand, ErrorOr<Product>>
 {
-    private readonly UserManager<IdentityUser> _userManager;
 
     private readonly IUserRepository _userRepository;
     private readonly IProductRepository _productRepository;
     private readonly ICategoryRepository _categoryRepository;
 
     public ProductCommandHandler(
-        UserManager<IdentityUser> userManager,
         IUserRepository userRepository,
         IProductRepository productRepository,
         ICategoryRepository categoryRepository)
     {
-        _userManager = userManager;
         _userRepository = userRepository;
         _productRepository = productRepository;
         _categoryRepository = categoryRepository;
@@ -35,8 +33,7 @@ public class ProductCommandHandler : IRequestHandler<ProductCommand, ErrorOr<Pro
 
     public async Task<ErrorOr<Product>> Handle(ProductCommand request, CancellationToken cancellationToken)
     {
-        string userId = _userManager.GetUserId(request.User)!;
-        var user = await _userRepository.GetUserById(Guid.Parse(userId));
+        var user = await _userRepository.GetUserByClaim(request.User);
         if(user is null || user.Role == Roles.Buyer)
         {
             return Errors.Authentication.Forbidden;
@@ -49,8 +46,8 @@ public class ProductCommandHandler : IRequestHandler<ProductCommand, ErrorOr<Pro
 
         CategoryId categoryId = CategoryId.Create(categoryIdGuid);
 
-
-        if(await _categoryRepository.GetById(categoryId) is null)
+        var category = await _categoryRepository.GetById(categoryId); 
+        if(category is null)
         {
             return Errors.Category.NotFound;
         }
@@ -61,6 +58,9 @@ public class ProductCommandHandler : IRequestHandler<ProductCommand, ErrorOr<Pro
             request.Quantity,
             request.Description,
             categoryId);
+
+        category.AddProductId((ProductId)product.Id);
+        
 
         await _productRepository.Add(product);
 

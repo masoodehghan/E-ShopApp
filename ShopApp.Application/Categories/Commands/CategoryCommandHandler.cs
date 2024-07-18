@@ -12,18 +12,15 @@ namespace ShopApp.Application.Categories.Commands;
 
 public class CategoryCommandHandler : IRequestHandler<CategoryCommand, ErrorOr<Category>>
 {
-    private readonly UserManager<IdentityUser> _userManager;
 
     private readonly ICategoryRepository _cateogryRepository;
     private readonly IUserRepository _userRepository;
 
     public CategoryCommandHandler(
         ICategoryRepository cateogryRepository,
-        UserManager<IdentityUser> userManager,
         IUserRepository userRepository)
     {
         _cateogryRepository = cateogryRepository;
-        _userManager = userManager;
         _userRepository = userRepository;
     }
 
@@ -32,8 +29,7 @@ public class CategoryCommandHandler : IRequestHandler<CategoryCommand, ErrorOr<C
         CancellationToken cancellationToken)
     {
 
-        string userId = _userManager.GetUserId(request.User)!;
-        var user = await _userRepository.GetUserById(Guid.Parse(userId));
+        var user = await _userRepository.GetUserByClaim(request.User);
         if(user is null || user.Role == Roles.Buyer)
         {
             return Errors.Authentication.Forbidden;

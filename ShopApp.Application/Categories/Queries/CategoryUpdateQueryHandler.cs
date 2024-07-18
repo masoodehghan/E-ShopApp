@@ -12,18 +12,15 @@ namespace ShopApp.Application.Categories.Queries;
 
 public class CategoryUpdateQueryHandler : IRequestHandler<CategoryUpdateQuery, ErrorOr<Category>>
 {
-    private readonly UserManager<IdentityUser> _userManager;
 
     private readonly ICategoryRepository _cateogryRepository;
     private readonly IUserRepository _userRepository;
 
     public CategoryUpdateQueryHandler(
         ICategoryRepository cateogryRepository,
-        UserManager<IdentityUser> userManager,
         IUserRepository userRepository)
     {
         _cateogryRepository = cateogryRepository;
-        _userManager = userManager;
         _userRepository = userRepository;
     }
     
@@ -31,8 +28,7 @@ public class CategoryUpdateQueryHandler : IRequestHandler<CategoryUpdateQuery, E
         CategoryUpdateQuery request,
         CancellationToken cancellationToken)
     {
-        string userId = _userManager.GetUserId(request.User)!;
-        var user = await _userRepository.GetUserById(Guid.Parse(userId));
+        var user = await _userRepository.GetUserByClaim(request.User);
         if(user is null || user.Role == Roles.Buyer)
         {
             return Errors.Authentication.Forbidden;

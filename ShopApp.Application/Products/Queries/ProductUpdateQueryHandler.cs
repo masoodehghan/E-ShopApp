@@ -14,19 +14,16 @@ namespace ShopApp.Application.Products.Queries;
 public class ProductUpdateQueryHandler : IRequestHandler<ProductUpdateQuery, ErrorOr<Product>>
 {
 
-    private readonly UserManager<IdentityUser> _userManager;
 
     private readonly IUserRepository _userRepository;
     private readonly IProductRepository _productRepository;
     private readonly ICategoryRepository _categoryRepository;
 
     public ProductUpdateQueryHandler(
-        UserManager<IdentityUser> userManager,
         IUserRepository userRepository,
         IProductRepository productRepository,
         ICategoryRepository categoryRepository)
     {
-        _userManager = userManager;
         _userRepository = userRepository;
         _productRepository = productRepository;
         _categoryRepository = categoryRepository;
@@ -35,8 +32,7 @@ public class ProductUpdateQueryHandler : IRequestHandler<ProductUpdateQuery, Err
         ProductUpdateQuery request,
         CancellationToken cancellationToken)
     {
-        string userId = _userManager.GetUserId(request.User)!;
-        var user = await _userRepository.GetUserById(Guid.Parse(userId));
+        var user = await _userRepository.GetUserByClaim(request.User);
         if(user is null || user.Role == Roles.Buyer)
         {
             return Errors.Authentication.Forbidden;

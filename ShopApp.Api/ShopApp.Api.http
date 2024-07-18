@@ -1,5 +1,5 @@
 @host = http://localhost:5256
-@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJnaXZlbl9uYW1lIjoic3RyaW5nIiwiZmFtaWx5X25hbWUiOiJzdHJpbmciLCJqdGkiOiJhMDhiZDBmOS04ODRhLTQzNWItYTBkZi00MjlkM2Q2ZjA3YzMiLCJzdWIiOiI1YTY0OGMwNy1lYmFhLTRiZGQtYjY0Yi1hOWU0YWE1MDE3ZDMiLCJleHAiOjE3MjA2MjIyMzQsImlzcyI6InNob3AiLCJhdWQiOiJhbGkifQ._h5bqDcOF2fMAM_P-pQHpulLpOJg2wzpdrhclgYZiGs
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJnaXZlbl9uYW1lIjoic3RyaW5nIiwiZmFtaWx5X25hbWUiOiJzdHJpbmciLCJqdGkiOiIyNWQ0NTY1MC1iYjU5LTQ5MDAtYTNhMS0xNTlkM2FiNTQ3NjEiLCJzdWIiOiI1YTY0OGMwNy1lYmFhLTRiZGQtYjY0Yi1hOWU0YWE1MDE3ZDMiLCJleHAiOjE3MjA5NjUzNzYsImlzcyI6InNob3AiLCJhdWQiOiJhbGkifQ.ejaCSt_ySgjFZZ0Cyamvi_ggNmalN5tsrg_5fORIXfQ
 
 Post {{host}}/api/auth/register
 Accept: application/json
@@ -32,7 +32,7 @@ Content-Type: application/json
 Authorization: Bearer {{token}}
 
 {
-    "name": "fvfssfd"
+    "name": "Tv"
 }
 
 ###
@@ -61,10 +61,10 @@ Content-Type: application/json
 Authorization: Bearer {{token}}
 
 {
-    "name": "awdfdsf",
-    "quantity": 1,
+    "name": "erwert",
+    "quantity": 10000,
     "price": 1432.00,
-    "categoryId": "f252b52c-adc2-48fd-b02a-4651cb505b6b",
+    "categoryId": "169b70a6-5f15-4c83-a3b7-a5c276fadadc",
     "desciption": "lorem ipsum"
 }
 
@@ -82,4 +82,21 @@ Authorization: Bearer {{token}}
     "quantity": 10,
     "price": 84.00,
     "categoryId": "f252b5dc-adc2-48fd-b02a-4651cb505b6b"
+}
+
+###
+
+GET {{host}}/api/dashboard/product
+Accept: application/json
+Content-Type: application/json
+
+###
+
+DELETE {{host}}/api/dashboard/product
+Accept: application/json
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+    "id": "5c4940b5-b147-4066-b76e-d3212e67bf32"
 }

@@ -22,6 +22,12 @@ public class ProductRepository : IProductRepository
         await _context.SaveChangesAsync();
     }
 
+    public async Task Delete(Product product)
+    {
+        _context.Products.Remove(product);
+        await _context.SaveChangesAsync();
+    }
+
     public async Task<Product?> GetById(ProductId id)
     {
         return await _context.Products.SingleOrDefaultAsync(p => p.Id == id);
@@ -32,4 +38,10 @@ public class ProductRepository : IProductRepository
         _context.Update(product);
         await _context.SaveChangesAsync();
     }
+
+    public async Task<List<Product>> GetAll()
+    {
+        return await _context.Products.ToListAsync();
+    }
+
 }
