@@ -48,6 +48,7 @@ public sealed class Category : AggregateRoot<CategoryId, Guid>
     }
 
 
+
     #pragma warning disable CS8618
 
     private Category()

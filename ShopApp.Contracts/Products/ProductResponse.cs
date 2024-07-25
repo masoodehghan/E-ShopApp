@@ -1,11 +1,13 @@
+using ShopApp.Contracts.Categories;
+
 namespace ShopApp.Contracts.Products;
 
 
-public record ProductResponse(
-    string Id,
-    string Name,
-    int Quantity,
-    string CategoryId,
-    float Price,
-    string Description
-);
+public class ProductResponse {
+    public string? ProductId { get; set; }
+    public string? Name { get; set; }
+    public int Quantity { get; set; }
+    public CategoryResponse? Category { get; set; }
+    public float? Price { get; set; }
+    public string? Description { get; set; }
+};

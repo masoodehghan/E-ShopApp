@@ -52,7 +52,7 @@ public class ProductConfiguration : IEntityTypeConfiguration<Product>
 
     private void ConfigureProductTable(EntityTypeBuilder<Product> builder)
     {
-        builder.ToTable("products");
+        builder.ToTable("Products");
         builder.HasKey("Id");
         builder.Property(p => p.Id)
             .HasColumnName("ProductId")
@@ -69,5 +69,6 @@ public class ProductConfiguration : IEntityTypeConfiguration<Product>
                         id => id.Value,
                         value => CategoryId.Create(value)
                     );
+                
     }
 }

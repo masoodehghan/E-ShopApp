@@ -1,5 +1,5 @@
 @host = http://localhost:5256
-@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJnaXZlbl9uYW1lIjoic3RyaW5nIiwiZmFtaWx5X25hbWUiOiJzdHJpbmciLCJqdGkiOiIyNWQ0NTY1MC1iYjU5LTQ5MDAtYTNhMS0xNTlkM2FiNTQ3NjEiLCJzdWIiOiI1YTY0OGMwNy1lYmFhLTRiZGQtYjY0Yi1hOWU0YWE1MDE3ZDMiLCJleHAiOjE3MjA5NjUzNzYsImlzcyI6InNob3AiLCJhdWQiOiJhbGkifQ.ejaCSt_ySgjFZZ0Cyamvi_ggNmalN5tsrg_5fORIXfQ
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJnaXZlbl9uYW1lIjoidGVzdCIsImZhbWlseV9uYW1lIjoic2FkIiwianRpIjoiOGRlODYyYjktYmU0Yi00YjFkLTljMDgtY2E4OWI3Y2Y4NTYwIiwic3ViIjoiYmE2YzllZDQtNzI5NC00NDUxLTkyYzQtOTc3NTU0MDA1YTIyIiwiZXhwIjoxNzIxOTE3MDIwLCJpc3MiOiJzaG9wIiwiYXVkIjoiYWxpIn0.Em1y-arEKDCY3LsJcz3gUWjGy4efPNH4ZnZEmGkKybs
 
 Post {{host}}/api/auth/register
 Accept: application/json
@@ -32,7 +32,7 @@ Content-Type: application/json
 Authorization: Bearer {{token}}
 
 {
-    "name": "Tv"
+    "name": "mobile"
 }
 
 ###
@@ -61,11 +61,11 @@ Content-Type: application/json
 Authorization: Bearer {{token}}
 
 {
-    "name": "erwert",
+    "name": "Lg",
     "quantity": 10000,
     "price": 1432.00,
-    "categoryId": "169b70a6-5f15-4c83-a3b7-a5c276fadadc",
-    "desciption": "lorem ipsum"
+    "categoryId": "714A40F0-F431-442F-8AE0-D139023333AE",
+    "description": "lorem ipsum"
 }
 
 

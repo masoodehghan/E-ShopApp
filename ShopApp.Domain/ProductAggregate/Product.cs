@@ -1,3 +1,4 @@
+using ShopApp.Domain.CategoryAggregate;
 using ShopApp.Domain.CategoryAggregate.ValueObjects;
 using ShopApp.Domain.Common.Models;
 using ShopApp.Domain.OrderAggregate.ValueObjects;

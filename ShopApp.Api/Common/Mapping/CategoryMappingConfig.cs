@@ -17,7 +17,7 @@ public class CategoryMappingConfig : IRegister
                 .Map(dest => dest, src => src.Item1);
             
         config.NewConfig<Category, CategoryResponse>()
-                .Map(dest => dest.Id, src => src.Id.Value.ToString())
+                .Map(dest => dest.CategoryId, src => src.Id.Value.ToString())
                 .Map(dest => dest.ProductIds, src => src.ProductIds.Select(g => g.Value.ToString()).ToList());
 
 

@@ -1,4 +1,6 @@
+using System.Data;
 using System.Security.Claims;
+using Dapper;
 using MapsterMapper;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
@@ -8,6 +10,8 @@ using ShopApp.Application.Categories.Commands;
 using ShopApp.Application.Categories.Queries;
 using ShopApp.Application.Common.Interfaces.Persistence;
 using ShopApp.Contracts.Categories;
+using ShopApp.Contracts.Products;
+using ShopApp.Domain.CategoryAggregate;
 using ShopApp.Domain.UserAggregate;
 
 namespace ShopApp.Api.Controllers;
@@ -20,11 +24,18 @@ public class CategoryController : ApiController
     private readonly IMapper _mapper;
     private readonly ICategoryRepository _categoryRepository;
 
-    public CategoryController(ISender mediatr, IMapper mapper, ICategoryRepository categoryRepository)
+    private readonly IDapperContext _dapperContext;
+
+    public CategoryController(
+        ISender mediatr,
+        IMapper mapper,
+        ICategoryRepository categoryRepository,
+        IDapperContext dapperContext)
     {
         _mediatr = mediatr;
         _mapper = mapper;
         _categoryRepository = categoryRepository;
+        _dapperContext = dapperContext;
     }
 
     [HttpPost]
@@ -44,8 +55,9 @@ public class CategoryController : ApiController
     [AllowAnonymous]
     public async Task<IActionResult> Get()
     {
-        var categories = await _categoryRepository.GetAll();
-        return Ok(_mapper.Map<List<CategoryResponse>>(categories));
+
+        var categories = await _mediatr.Send(new CategoryListQuery());
+        return Ok(categories);
     }
 
     [HttpPut]
