@@ -1,5 +1,6 @@
 using ShopApp.Domain.Common.Models;
 using ShopApp.Domain.UserAggregate.Enums;
+using ShopApp.Domain.UserAggregate.Events;
 using ShopApp.Domain.UserAggregate.ValueObjects;
 
 namespace ShopApp.Domain.UserAggregate;
@@ -47,7 +48,7 @@ public sealed class User : AggregateRoot<UserId, Guid>
         long? phoneNumber,
         Roles role = Roles.Buyer)
     {
-        return new(
+        User user =  new(
             UserId.CreateUnique(),
             firstName,
             lastName,
@@ -57,6 +58,9 @@ public sealed class User : AggregateRoot<UserId, Guid>
             phoneNumber,
             role
         );
+
+        user.AddDomainEvents(new UserCreated(user));
+        return user;
     }
 
 

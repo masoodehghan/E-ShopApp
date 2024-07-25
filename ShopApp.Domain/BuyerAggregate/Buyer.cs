@@ -19,7 +19,7 @@ public sealed class Buyer : AggregateRoot<BuyerId, Guid>
         _orderIds = orderIds;
     }
 
-    public static Buyer Create(UserId userId, List<OrderId>? orderIds)
+    public static Buyer Create(UserId userId, List<OrderId>? orderIds = null)
     {
         return new(BuyerId.CreateUnique(), userId, orderIds ?? new());
     }
