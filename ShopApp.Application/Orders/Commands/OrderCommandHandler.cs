@@ -1,15 +1,83 @@
 using ErrorOr;
 using MediatR;
+using ShopApp.Application.Common.Interfaces.Persistence;
+using ShopApp.Domain.BuyerAggregate.ValueObjects;
+using ShopApp.Domain.Common.Errors;
 using ShopApp.Domain.OrderAggregate;
+using ShopApp.Domain.OrderAggregate.Entities;
+using ShopApp.Domain.OrderAggregate.ValueObjects;
+using ShopApp.Domain.ProductAggregate.ValueObjects;
+using ShopApp.Domain.UserAggregate.ValueObjects;
 
 namespace ShopApp.Application.Orders.Commands;
 
 
 public class OrderCommandHandler : IRequestHandler<OrderCommand, ErrorOr<Order>>
 {
-    public Task<ErrorOr<Order>> Handle(OrderCommand request, CancellationToken cancellationToken)
+    private readonly IBuyerRepository _buyerRepository;
+    private readonly IOrderRepository _orderRepository;
+    private readonly IProductRepository _productRepository;
+    private readonly IUserRepository _userRepository;
+
+    public OrderCommandHandler(
+        IBuyerRepository buyerRepository,
+        IOrderRepository orderRepository,
+        IProductRepository productRepository,
+        IUserRepository userRepository)
     {
-        throw new NotImplementedException();
+        _buyerRepository = buyerRepository;
+        _orderRepository = orderRepository;
+        _productRepository = productRepository;
+        _userRepository = userRepository;
+    }
+
+    public async Task<ErrorOr<Order>> Handle(OrderCommand request, CancellationToken cancellationToken)
+    {
+        var random = new Random();
+        
+        // foreach(var d in request.OrderItems)
+        // {
+        //     if(!Guid.TryParse(d.ProductId, out Guid productId))
+        //     {
+        //         return Errors.Product.NotFound;
+        //     }  
+        //     var product = await _productRepository.GetById(ProductId.Create(productId));
+
+        //     if(product is null)
+        //     {
+        //         return Errors.Product.NotFound;
+        //     }
+        // }
+
+        List<ProductId> productIds = request.OrderItems
+                .Select(s => ProductId.Create(Guid.Parse(s.ProductId)))
+                .ToList();
+
+        if(await _productRepository.GetByIds(productIds) is null)
+        {
+            return Errors.Product.NotFound;
+        }
+
+        var user = await _userRepository.GetUserByClaim(request.User);
+        if(user is null) return Errors.Authentication.Forbidden;
+
+        var buyer = await _buyerRepository.GetByUserId((UserId)user.Id);
+
+        var order = Order.Create(
+                random.Next(10000000,  9999999),
+                Address.Create(
+                    request.Address.City,
+                    request.Address.Street,
+                    request.Address.Code),
+                (BuyerId)buyer.Id,
+                
+                request.OrderItems.ConvertAll(orderItem => 
+                        OrderItem.Create(
+                            orderItem.Quantity,
+                            ProductId.Create(Guid.Parse(orderItem.ProductId))))
+                );
+
+        return order;
     }
 }
 

@@ -1,5 +1,7 @@
+using Microsoft.EntityFrameworkCore;
 using ShopApp.Application.Common.Interfaces.Persistence;
 using ShopApp.Domain.BuyerAggregate;
+using ShopApp.Domain.UserAggregate.ValueObjects;
 
 namespace ShopApp.Infrustructure.Persistence.Repositories;
 
@@ -18,5 +20,10 @@ public class BuyerRepository : IBuyerRepository
     {
         await _context.AddAsync(buyer);
         await _context.SaveChangesAsync();
+    }
+
+    public async Task<Buyer> GetByUserId(UserId userId)
+    {
+        return await _context.Buyers.SingleAsync(s => s.UserId == userId);
     }
 }

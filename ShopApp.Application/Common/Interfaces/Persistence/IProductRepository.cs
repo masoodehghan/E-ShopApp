@@ -10,6 +10,8 @@ public interface IProductRepository
 
     Task<Product?> GetById(ProductId id);
 
+    Task<Product?> GetByIds(List<ProductId> productIds);
+
     Task Update(Product product);
 
     Task Delete(Product product);

@@ -1,3 +1,4 @@
+using System.Runtime.CompilerServices;
 using Microsoft.EntityFrameworkCore;
 using ShopApp.Application.Common.Interfaces.Persistence;
 using ShopApp.Domain.ProductAggregate;
@@ -33,6 +34,8 @@ public class ProductRepository : IProductRepository
         return await _context.Products.SingleOrDefaultAsync(p => p.Id == id);
     }
 
+    
+
     public async Task Update(Product product)
     {
         _context.Update(product);
@@ -44,4 +47,14 @@ public class ProductRepository : IProductRepository
         return await _context.Products.ToListAsync();
     }
 
+    public async Task<Product?> GetByIds(List<ProductId> productIds)
+    {
+        
+        var product =  await _context
+                        .Products
+                        .Where(s => _context.Products.Contains(s))
+                        .SingleAsync();
+                        
+        return product;
+    }
 }

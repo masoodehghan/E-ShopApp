@@ -32,9 +32,9 @@ public sealed class Order : AggregateRoot<OrderId, Guid>
 
     public static Order Create(
         int number,
-        List<OrderItem> orderItems,
         Address address,
-        BuyerId buyerId
+        BuyerId buyerId,
+        List<OrderItem> orderItems
     )
     {
         return new(

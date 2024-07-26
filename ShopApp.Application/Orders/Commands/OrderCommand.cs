@@ -1,3 +1,4 @@
+using System.Security.Claims;
 using ErrorOr;
 using MediatR;
 using ShopApp.Domain.OrderAggregate;
@@ -6,9 +7,10 @@ namespace ShopApp.Application.Orders.Commands;
 
 
 public record OrderCommand(
-    OrderItemCommand OrderItem,
+    List<OrderItemCommand> OrderItems,
     int Number,
-    AddressCommand Address
+    AddressCommand Address,
+    ClaimsPrincipal User
 ) : IRequest<ErrorOr<Order>>;
 
 

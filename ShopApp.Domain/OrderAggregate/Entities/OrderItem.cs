@@ -10,6 +10,17 @@ public sealed class OrderItem : Entity<OrderItemId>
     public int Quantity { get; private set; } = 1;
 
     public ProductId ProductId  { get; private set; }
-    
+
+    public OrderItem(int quantity, ProductId productId)
+    {
+        Quantity = quantity;
+        ProductId = productId;
+    }
+
+    public static OrderItem Create(int quantity, ProductId productId)
+    {
+        return new(quantity, productId);
+    }
+
 
 }
