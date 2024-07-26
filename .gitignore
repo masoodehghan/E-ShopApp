@@ -4,4 +4,4 @@
 .vs*
 */appsettings*.json
 *.http
-*.sqlite3
+*.sqlite3*
