@@ -35,28 +35,20 @@ public class OrderCommandHandler : IRequestHandler<OrderCommand, ErrorOr<Order>>
     {
         var random = new Random();
         
-        // foreach(var d in request.OrderItems)
-        // {
-        //     if(!Guid.TryParse(d.ProductId, out Guid productId))
-        //     {
-        //         return Errors.Product.NotFound;
-        //     }  
-        //     var product = await _productRepository.GetById(ProductId.Create(productId));
-
-        //     if(product is null)
-        //     {
-        //         return Errors.Product.NotFound;
-        //     }
-        // }
-
-        List<ProductId> productIds = request.OrderItems
-                .Select(s => ProductId.Create(Guid.Parse(s.ProductId)))
-                .ToList();
-
-        if(await _productRepository.GetByIds(productIds) is null)
+        foreach(var d in request.OrderItems)
         {
-            return Errors.Product.NotFound;
+            if(!Guid.TryParse(d.ProductId, out Guid productId))
+            {
+                return Errors.Product.NotFound;
+            }  
+            var product = await _productRepository.GetById(ProductId.Create(productId));
+
+            if(product is null)
+            {
+                return Errors.Product.NotFound;
+            }
         }
+
 
         var user = await _userRepository.GetUserByClaim(request.User);
         if(user is null) return Errors.Authentication.Forbidden;
@@ -64,7 +56,7 @@ public class OrderCommandHandler : IRequestHandler<OrderCommand, ErrorOr<Order>>
         var buyer = await _buyerRepository.GetByUserId((UserId)user.Id);
 
         var order = Order.Create(
-                random.Next(10000000,  9999999),
+                random.Next(10000,  9999999),
                 Address.Create(
                     request.Address.City,
                     request.Address.Street,
@@ -76,7 +68,8 @@ public class OrderCommandHandler : IRequestHandler<OrderCommand, ErrorOr<Order>>
                             orderItem.Quantity,
                             ProductId.Create(Guid.Parse(orderItem.ProductId))))
                 );
-
+        await _orderRepository.Add(order);
+        
         return order;
     }
 }

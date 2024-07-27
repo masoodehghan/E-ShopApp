@@ -11,16 +11,21 @@ public sealed class OrderItem : Entity<OrderItemId>
 
     public ProductId ProductId  { get; private set; }
 
-    public OrderItem(int quantity, ProductId productId)
+    private OrderItem(OrderItemId id, int quantity, ProductId productId)
     {
+        Id = id;
         Quantity = quantity;
         ProductId = productId;
     }
 
     public static OrderItem Create(int quantity, ProductId productId)
     {
-        return new(quantity, productId);
+        return new(OrderItemId.CreateUnique(), quantity, productId);
     }
 
+    #pragma warning disable CS8618
 
+    private OrderItem()
+    { }
+    #pragma warning restore CS8618
 }

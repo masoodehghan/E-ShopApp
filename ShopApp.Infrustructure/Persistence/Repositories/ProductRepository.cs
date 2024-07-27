@@ -53,7 +53,7 @@ public class ProductRepository : IProductRepository
         var product =  await _context
                         .Products
                         .Where(s => _context.Products.Contains(s))
-                        .SingleAsync();
+                        .FirstAsync();
                         
         return product;
     }

@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using ShopApp.Domain.BuyerAggregate.ValueObjects;
 using ShopApp.Domain.OrderAggregate;
 using ShopApp.Domain.OrderAggregate.ValueObjects;
+using ShopApp.Domain.ProductAggregate.ValueObjects;
 
 namespace ShopApp.Infrustructure.Persistence.Configurations;
 
@@ -11,24 +12,36 @@ public class OrderConfiguration : IEntityTypeConfiguration<Order>
 {
     public void Configure(EntityTypeBuilder<Order> builder)
     {
+        ConfigureOrderItemsTable(builder);
         ConfigureOrderTable(builder);
-        ConfigureOrderItemIdsTable(builder);
     }
 
-    private void ConfigureOrderItemIdsTable(EntityTypeBuilder<Order> builder)
+    private void ConfigureOrderItemsTable(EntityTypeBuilder<Order> builder)
     {
-        builder.OwnsMany(o => o.OrderItemIds, oib => 
+        builder.OwnsMany(o => o.OrderItems, ob => 
         {
-            oib.ToTable("OrderOrderItemIds");
-            oib.HasKey("Id");
-            oib.WithOwner().HasForeignKey("OrderId");
-            oib.Property(o => o.Value)
-                .ValueGeneratedNever()
-                .HasColumnName("OrderItemId");
+            ob.ToTable("OrderItems");
+            ob.WithOwner().HasForeignKey("OrderId");
+            ob.HasKey("Id", "OrderId");
+            ob.Property(o => o.Id)
+                    .ValueGeneratedNever()
+                    .HasConversion(
+                        id => id.Value,
+                        value => OrderItemId.Create(value)
+                    )
+                    .HasColumnName("OrderItemId");
+            
+            ob.Property(o => o.ProductId)
+                    .ValueGeneratedNever()
+                    .HasConversion(
+                        id => id.Value,
+                        value => ProductId.Create(value)
+                    )
+                    .HasColumnName("ProductId");
         });
 
         builder.Metadata
-                .FindNavigation(nameof(Order.OrderItemIds))!
+                .FindNavigation(nameof(Order.OrderItems))!
                 .SetPropertyAccessMode(PropertyAccessMode.Field);
     }
 

@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace ShopApp.Infrustructure.Migrations
 {
     /// <inheritdoc />
-    public partial class Init : Migration
+    public partial class Inital : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -52,7 +52,7 @@ namespace ShopApp.Infrustructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "products",
+                name: "Products",
                 columns: table => new
                 {
                     ProductId = table.Column<Guid>(type: "TEXT", nullable: false),
@@ -64,7 +64,7 @@ namespace ShopApp.Infrustructure.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_products", x => x.ProductId);
+                    table.PrimaryKey("PK_Products", x => x.ProductId);
                 });
 
             migrationBuilder.CreateTable(
@@ -138,19 +138,19 @@ namespace ShopApp.Infrustructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "OrderOrderItemIds",
+                name: "OrderItems",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
+                    OrderItemId = table.Column<Guid>(type: "TEXT", nullable: false),
                     OrderId = table.Column<Guid>(type: "TEXT", nullable: false),
-                    OrderItemId = table.Column<Guid>(type: "TEXT", nullable: false)
+                    Quantity = table.Column<int>(type: "INTEGER", nullable: false),
+                    ProductId = table.Column<Guid>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_OrderOrderItemIds", x => x.Id);
+                    table.PrimaryKey("PK_OrderItems", x => new { x.OrderItemId, x.OrderId });
                     table.ForeignKey(
-                        name: "FK_OrderOrderItemIds_Orders_OrderId",
+                        name: "FK_OrderItems_Orders_OrderId",
                         column: x => x.OrderId,
                         principalTable: "Orders",
                         principalColumn: "OrderId",
@@ -170,9 +170,9 @@ namespace ShopApp.Infrustructure.Migrations
                 {
                     table.PrimaryKey("PK_ProductOrderItemIdIds", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_ProductOrderItemIdIds_products_ProductId",
+                        name: "FK_ProductOrderItemIdIds_Products_ProductId",
                         column: x => x.ProductId,
-                        principalTable: "products",
+                        principalTable: "Products",
                         principalColumn: "ProductId",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -190,9 +190,9 @@ namespace ShopApp.Infrustructure.Migrations
                 {
                     table.PrimaryKey("PK_ProductTagIds", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_ProductTagIds_products_ProductId",
+                        name: "FK_ProductTagIds_Products_ProductId",
                         column: x => x.ProductId,
-                        principalTable: "products",
+                        principalTable: "Products",
                         principalColumn: "ProductId",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -228,8 +228,8 @@ namespace ShopApp.Infrustructure.Migrations
                 column: "CategoryId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_OrderOrderItemIds_OrderId",
-                table: "OrderOrderItemIds",
+                name: "IX_OrderItems_OrderId",
+                table: "OrderItems",
                 column: "OrderId");
 
             migrationBuilder.CreateIndex(
@@ -258,7 +258,7 @@ namespace ShopApp.Infrustructure.Migrations
                 name: "CategoryProductIds");
 
             migrationBuilder.DropTable(
-                name: "OrderOrderItemIds");
+                name: "OrderItems");
 
             migrationBuilder.DropTable(
                 name: "ProductOrderItemIdIds");
@@ -282,7 +282,7 @@ namespace ShopApp.Infrustructure.Migrations
                 name: "Orders");
 
             migrationBuilder.DropTable(
-                name: "products");
+                name: "Products");
 
             migrationBuilder.DropTable(
                 name: "Tags");

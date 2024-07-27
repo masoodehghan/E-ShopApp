@@ -11,7 +11,7 @@ public sealed class Order : AggregateRoot<OrderId, Guid>
     public int Number { get; private set; }
 
     private readonly List<OrderItem> _orderItems = new();
-    public IReadOnlyList<OrderItem> OrderItemIds => _orderItems.AsReadOnly();
+    public IReadOnlyList<OrderItem> OrderItems => _orderItems.AsReadOnly();
 
     public Address Address { get; private set; }
     
@@ -24,6 +24,7 @@ public sealed class Order : AggregateRoot<OrderId, Guid>
         Address address,
         BuyerId buyerId)
     {
+        Id = id;
         Number = number;
         _orderItems = orderItems;
         Address = address;

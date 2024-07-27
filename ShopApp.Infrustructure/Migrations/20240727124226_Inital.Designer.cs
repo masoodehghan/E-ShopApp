@@ -11,14 +11,14 @@ using ShopApp.Infrustructure.Persistence;
 namespace ShopApp.Infrustructure.Migrations
 {
     [DbContext(typeof(ShopAppDbContext))]
-    [Migration("20240702191708_Init")]
-    partial class Init
+    [Migration("20240727124226_Inital")]
+    partial class Inital
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
-            modelBuilder.HasAnnotation("ProductVersion", "8.0.6");
+            modelBuilder.HasAnnotation("ProductVersion", "8.0.7");
 
             modelBuilder.Entity("ShopApp.Domain.BuyerAggregate.Buyer", b =>
                 {
@@ -94,7 +94,7 @@ namespace ShopApp.Infrustructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("products", (string)null);
+                    b.ToTable("Products", (string)null);
                 });
 
             modelBuilder.Entity("ShopApp.Domain.TagAggregate.Tag", b =>
@@ -178,8 +178,6 @@ namespace ShopApp.Infrustructure.Migrations
 
                             b1.ToTable("BuyerOrderIds", (string)null);
 
-                            // b1.HasDiscriminator().HasValue("OrderId");
-
                             b1.WithOwner()
                                 .HasForeignKey("BuyerId");
                         });
@@ -217,24 +215,27 @@ namespace ShopApp.Infrustructure.Migrations
 
             modelBuilder.Entity("ShopApp.Domain.OrderAggregate.Order", b =>
                 {
-                    b.OwnsMany("ShopApp.Domain.OrderAggregate.ValueObjects.OrderItemId", "OrderItemIds", b1 =>
+                    b.OwnsMany("ShopApp.Domain.OrderAggregate.Entities.OrderItem", "OrderItems", b1 =>
                         {
-                            b1.Property<int>("Id")
-                                .ValueGeneratedOnAdd()
-                                .HasColumnType("INTEGER");
+                            b1.Property<Guid>("Id")
+                                .HasColumnType("TEXT")
+                                .HasColumnName("OrderItemId");
 
                             b1.Property<Guid>("OrderId")
                                 .HasColumnType("TEXT");
 
-                            b1.Property<Guid>("Value")
+                            b1.Property<Guid>("ProductId")
                                 .HasColumnType("TEXT")
-                                .HasColumnName("OrderItemId");
+                                .HasColumnName("ProductId");
 
-                            b1.HasKey("Id");
+                            b1.Property<int>("Quantity")
+                                .HasColumnType("INTEGER");
+
+                            b1.HasKey("Id", "OrderId");
 
                             b1.HasIndex("OrderId");
 
-                            b1.ToTable("OrderOrderItemIds", (string)null);
+                            b1.ToTable("OrderItems", (string)null);
 
                             b1.WithOwner()
                                 .HasForeignKey("OrderId");
@@ -267,7 +268,7 @@ namespace ShopApp.Infrustructure.Migrations
                     b.Navigation("Address")
                         .IsRequired();
 
-                    b.Navigation("OrderItemIds");
+                    b.Navigation("OrderItems");
                 });
 
             modelBuilder.Entity("ShopApp.Domain.ProductAggregate.Product", b =>
@@ -313,8 +314,6 @@ namespace ShopApp.Infrustructure.Migrations
                             b1.HasIndex("ProductId");
 
                             b1.ToTable("ProductTagIds", (string)null);
-
-                            // b1.HasDiscriminator().HasValue("TagId");
 
                             b1.WithOwner()
                                 .HasForeignKey("ProductId");
