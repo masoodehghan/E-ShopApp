@@ -5,5 +5,5 @@ namespace ShopApp.Application.Common.Interfaces.Persistence;
 
 public interface IOrderRepository
 {
-    public Task Add(Order order);
+    public Task Add(Order order, CancellationToken cancellationToken);
 }

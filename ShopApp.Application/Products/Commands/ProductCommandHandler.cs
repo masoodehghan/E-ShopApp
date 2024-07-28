@@ -62,7 +62,7 @@ public class ProductCommandHandler : IRequestHandler<ProductCommand, ErrorOr<Pro
         category.AddProductId((ProductId)product.Id);
         
 
-        await _productRepository.Add(product);
+        await _productRepository.Add(product, cancellationToken);
 
         return product;
     }

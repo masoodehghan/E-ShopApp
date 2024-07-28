@@ -48,7 +48,7 @@ public class ProductUpdateQueryHandler : IRequestHandler<ProductUpdateQuery, Err
             return Errors.Category.NotFound;
         }
 
-        var product = await _productRepository.GetById(ProductId.Create(productId));
+        var product = await _productRepository.GetById(ProductId.Create(productId), cancellationToken);
         
         if(product is null)
         {

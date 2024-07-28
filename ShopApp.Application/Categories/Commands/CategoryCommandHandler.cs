@@ -36,7 +36,7 @@ public class CategoryCommandHandler : IRequestHandler<CategoryCommand, ErrorOr<C
         }
 
         var category = Category.Create(request.Name);
-        await _cateogryRepository.Add(category);
+        await _cateogryRepository.Add(category, cancellationToken);
 
         return category;
 

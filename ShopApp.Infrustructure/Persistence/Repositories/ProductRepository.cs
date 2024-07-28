@@ -16,11 +16,11 @@ public class ProductRepository : IProductRepository
             _context = context;
         }
 
-    public async Task Add(Product product)
+    public async Task Add(Product product, CancellationToken cancellationToken)
     {
         
-        await _context.Products.AddAsync(product);
-        await _context.SaveChangesAsync();
+        await _context.Products.AddAsync(product, cancellationToken);
+        await _context.SaveChangesAsync(cancellationToken);
     }
 
     public async Task Delete(Product product)
@@ -29,9 +29,10 @@ public class ProductRepository : IProductRepository
         await _context.SaveChangesAsync();
     }
 
-    public async Task<Product?> GetById(ProductId id)
+    public async Task<Product?> GetById(ProductId id, CancellationToken cancellationToken)
     {
-        return await _context.Products.SingleOrDefaultAsync(p => p.Id == id);
+        return await _context.Products
+                        .SingleOrDefaultAsync(p => p.Id == id, cancellationToken);
     }
 
     
@@ -56,5 +57,10 @@ public class ProductRepository : IProductRepository
                         .FirstAsync();
                         
         return product;
+    }
+
+    public async Task CancelOperations(CancellationToken cancellationToken)
+    {
+        await _context.SaveChangesAsync(cancellationToken);
     }
 }

@@ -21,6 +21,10 @@ public class ProductCreatedEventHandler : INotificationHandler<ProductCreated>
     public async Task Handle(ProductCreated notification, CancellationToken cancellationToken)
     {
         await Task.CompletedTask;
+        CancellationTokenSource cancellation = new();
+        cancellation.Cancel();
+        // await _categoryRepository.Add();
+        
         // Category? category = await _categoryRepository.GetById(notification.Prodcut.CategoryId); 
         // if (category is null)
         // {

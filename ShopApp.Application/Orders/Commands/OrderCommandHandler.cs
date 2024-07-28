@@ -40,13 +40,7 @@ public class OrderCommandHandler : IRequestHandler<OrderCommand, ErrorOr<Order>>
             if(!Guid.TryParse(d.ProductId, out Guid productId))
             {
                 return Errors.Product.NotFound;
-            }  
-            var product = await _productRepository.GetById(ProductId.Create(productId));
-
-            if(product is null)
-            {
-                return Errors.Product.NotFound;
-            }
+            } 
         }
 
 
@@ -68,7 +62,7 @@ public class OrderCommandHandler : IRequestHandler<OrderCommand, ErrorOr<Order>>
                             orderItem.Quantity,
                             ProductId.Create(Guid.Parse(orderItem.ProductId))))
                 );
-        await _orderRepository.Add(order);
+        await _orderRepository.Add(order, cancellationToken);
         
         return order;
     }

@@ -6,9 +6,10 @@ namespace ShopApp.Application.Common.Interfaces.Persistence;
 
 public interface IProductRepository
 {
-    Task Add(Product product);
+    Task Add(Product product, CancellationToken cancellationToken);
 
-    Task<Product?> GetById(ProductId id);
+    Task<Product?> GetById(ProductId id, CancellationToken cancellationToken);
+    Task CancelOperations(CancellationToken cancellationToken);
 
     Task<Product?> GetByIds(List<ProductId> productIds);
 

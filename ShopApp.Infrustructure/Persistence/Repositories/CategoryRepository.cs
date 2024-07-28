@@ -15,10 +15,10 @@ public class CategoryRepository : ICategoryRepository
         _context = context;
     }
 
-    public async Task Add(Category category)
+    public async Task Add(Category category, CancellationToken cancellationToken)
     {
-        _context.Categories.Add(category);
-        await _context.SaveChangesAsync();
+        await _context.Categories.AddAsync(category, cancellationToken);
+        await _context.SaveChangesAsync(cancellationToken);
     }
 
     public async Task<List<Category>> GetAll()

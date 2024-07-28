@@ -92,6 +92,14 @@ public sealed class Product : AggregateRoot<ProductId, Guid>
         return product;
     }
 
+    public void AddOrderItemId(OrderItemId orderItemId)
+    {
+        if(!_orderItemIds.Contains(orderItemId))
+        {
+            _orderItemIds.Add(orderItemId);
+        }
+    }
+
     #pragma warning disable CS8618
 
     private Product()

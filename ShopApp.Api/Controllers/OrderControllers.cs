@@ -24,11 +24,19 @@ public class OrderControllers : ApiController
     {
         var command = _mapper.Map<OrderCommand>((request, User));
 
-        var result = await _mediatr.Send(command);
-
-        return result.Match(
+        try
+        {
+            var result = await _mediatr.Send(command);
+            
+            return result.Match(
             order => Ok(_mapper.Map<OrderResponse>(order)),
-            errors => Problem(errors)
-        );
+            errors => Problem(errors));
+        }
+        catch(OperationCanceledException e)
+        {
+            return Problem("error");
+        }
+
+        
     }
 }

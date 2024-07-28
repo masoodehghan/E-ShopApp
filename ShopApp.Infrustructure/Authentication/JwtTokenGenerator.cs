@@ -41,7 +41,7 @@ namespace ShopApp.Infrastructure.Authentication
                 signingCredentials: singingCredentials,
                 issuer: _jwtSettings.Issuer,
                 audience: _jwtSettings.Audience,
-                expires: _dateTimeProvider.UtcNow.AddMinutes(_jwtSettings.ExpirayMinute)
+                expires: _dateTimeProvider.UtcNow.AddDays(_jwtSettings.ExpirayMinute) //TODO Change to minute
                 
                 );
 

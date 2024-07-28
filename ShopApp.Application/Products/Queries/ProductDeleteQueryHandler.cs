@@ -32,7 +32,7 @@ public class ProductDeleteQueryHandler : IRequestHandler<ProductDeleteQuery, Err
             return Errors.Product.NotFound;
         }
 
-        var product = await _productRepository.GetById(ProductId.Create(productId));
+        var product = await _productRepository.GetById(ProductId.Create(productId), cancellationToken);
 
         if(product is null)
         {

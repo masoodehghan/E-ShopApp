@@ -6,7 +6,7 @@ namespace ShopApp.Application.Common.Interfaces.Persistence;
 
 public interface ICategoryRepository
 {
-    Task Add(Category category);
+    Task Add(Category category, CancellationToken cancellationToken);
     
     Task<List<Category>> GetAll();
 

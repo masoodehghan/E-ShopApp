@@ -90,11 +90,11 @@ public class ProductController : ApiController
 
     [HttpGet("{id}")]
     [AllowAnonymous]
-    public async Task<IActionResult> Get(string id)
+    public async Task<IActionResult> Get(string id, CancellationToken cancellationToken)
     {
         if(!Guid.TryParse(id, out Guid productId))  return NotFound();
         
-        var product = await _productRepository.GetById(ProductId.Create(productId));
+        var product = await _productRepository.GetById(ProductId.Create(productId), cancellationToken);
 
         if(product is null)  return NotFound();
 
