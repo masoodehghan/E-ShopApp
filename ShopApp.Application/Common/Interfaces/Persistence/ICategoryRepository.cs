@@ -13,4 +13,6 @@ public interface ICategoryRepository
     Task<Category?> GetById(CategoryId id);
 
     Task Update(Category category);
+
+    Task Delete(Category category, CancellationToken cancellationToken);
 }

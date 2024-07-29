@@ -73,6 +73,20 @@ public class CategoryController : ApiController
         );
     }
 
+
+    [HttpDelete]
+    public async Task<IActionResult> Delete(CategoryDeleteRequest request)
+    {
+        var query = _mapper.Map<CategoryDeleteQuery>((request, User));
+
+        var result = await _mediatr.Send(query);
+
+        return result.Match(
+            _ => NoContent(),
+            errors => Problem(errors)
+        );
+    }
+
     
 
 }

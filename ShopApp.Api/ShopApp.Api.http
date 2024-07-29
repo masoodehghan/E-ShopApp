@@ -123,3 +123,16 @@ Authorization: Bearer {{tokenBuyer}}
         }
     ]
 }
+
+
+###
+
+DELETE {{host}}/api/dashboard/category
+Accept: application/json
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+    "categoryId": "08DCD081-3F30-49E4-8919-743D57898C42"
+}
+

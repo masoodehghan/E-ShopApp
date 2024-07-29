@@ -25,6 +25,10 @@ public class CategoryMappingConfig : IRegister
                         .Map(dest => dest.User, src => src.Item2)
                         .Map(dest => dest.CategoryId, src => src.Item1.Id)
                         .Map(dest => dest.Name, src => src.Item1.Name);
+
+        config.NewConfig<(CategoryDeleteRequest, ClaimsPrincipal), CategoryDeleteQuery>()
+                        .Map(dest => dest.CategoryId, src => src.Item1.CategoryId)
+                        .Map(dest => dest.User, src => src.Item2);
         
         }
 }

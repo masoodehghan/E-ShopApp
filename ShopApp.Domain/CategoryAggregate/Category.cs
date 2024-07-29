@@ -47,6 +47,10 @@ public sealed class Category : AggregateRoot<CategoryId, Guid>
         
     }
 
+    public void RemoveProductId(ProductId productId)
+    {
+        _productIds.Remove(productId);
+    }
 
 
     #pragma warning disable CS8618

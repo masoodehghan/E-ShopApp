@@ -11,11 +11,12 @@ public interface IProductRepository
     Task<Product?> GetById(ProductId id, CancellationToken cancellationToken);
     Task CancelOperations(CancellationToken cancellationToken);
 
-    Task<Product?> GetByIds(List<ProductId> productIds);
+    Task<Product?> GetByIds(List<ProductId> productIds, CancellationToken cancellationToken);
 
-    Task Update(Product product);
+    Task Update(Product product, CancellationToken cancellationToken);
 
-    Task Delete(Product product);
-    Task<List<Product>> GetAll();
+    Task Delete(Product product, CancellationToken cancellationToken);
+
+    Task<List<Product>> GetAll(CancellationToken cancellationToken);
 }
 

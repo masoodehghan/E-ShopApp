@@ -23,10 +23,10 @@ public class ProductRepository : IProductRepository
         await _context.SaveChangesAsync(cancellationToken);
     }
 
-    public async Task Delete(Product product)
+    public async Task Delete(Product product, CancellationToken cancellationToken)
     {
         _context.Products.Remove(product);
-        await _context.SaveChangesAsync();
+        await _context.SaveChangesAsync(cancellationToken);
     }
 
     public async Task<Product?> GetById(ProductId id, CancellationToken cancellationToken)
@@ -37,24 +37,24 @@ public class ProductRepository : IProductRepository
 
     
 
-    public async Task Update(Product product)
+    public async Task Update(Product product, CancellationToken cancellationToken)
     {
         _context.Update(product);
-        await _context.SaveChangesAsync();
+        await _context.SaveChangesAsync(cancellationToken);
     }
 
-    public async Task<List<Product>> GetAll()
+    public async Task<List<Product>> GetAll(CancellationToken cancellationToken)
     {
-        return await _context.Products.ToListAsync();
+        return await _context.Products.ToListAsync(cancellationToken);
     }
 
-    public async Task<Product?> GetByIds(List<ProductId> productIds)
+    public async Task<Product?> GetByIds(List<ProductId> productIds, CancellationToken cancellationToken)
     {
         
         var product =  await _context
                         .Products
                         .Where(s => _context.Products.Contains(s))
-                        .FirstAsync();
+                        .FirstAsync(cancellationToken);
                         
         return product;
     }

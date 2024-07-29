@@ -32,9 +32,10 @@ public class OrderControllers : ApiController
             order => Ok(_mapper.Map<OrderResponse>(order)),
             errors => Problem(errors));
         }
-        catch(OperationCanceledException e)
+
+        catch(OperationCanceledException _)
         {
-            return Problem("error");
+            return Problem();
         }
 
         
