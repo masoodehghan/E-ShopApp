@@ -8,11 +8,15 @@ public interface ICategoryRepository
 {
     Task Add(Category category, CancellationToken cancellationToken);
     
-    Task<List<Category>> GetAll();
+    Task<List<Category>> GetAll(CancellationToken cancellationToken);
 
-    Task<Category?> GetById(CategoryId id);
+    Task<Category?> GetById(CategoryId id, CancellationToken cancellationToken);
 
-    Task Update(Category category);
+    Task Update(Category category, CancellationToken cancellationToken);
 
     Task Delete(Category category, CancellationToken cancellationToken);
+
+
+    Task CancelOperation(CancellationToken cancellationToken);
+
 }

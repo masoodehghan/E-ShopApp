@@ -16,14 +16,14 @@ public class BuyerRepository : IBuyerRepository
         _context = context;
     }
 
-    public async Task Add(Buyer buyer)
+    public async Task Add(Buyer buyer, CancellationToken cancellationToken)
     {
-        await _context.AddAsync(buyer);
-        await _context.SaveChangesAsync();
+        await _context.AddAsync(buyer, cancellationToken);
+        await _context.SaveChangesAsync(cancellationToken);
     }
 
-    public async Task<Buyer> GetByUserId(UserId userId)
+    public async Task<Buyer> GetByUserId(UserId userId, CancellationToken cancellationToken)
     {
-        return await _context.Buyers.SingleAsync(s => s.UserId == userId);
+        return await _context.Buyers.SingleAsync(s => s.UserId == userId, cancellationToken);
     }
 }

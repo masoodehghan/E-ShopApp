@@ -33,7 +33,7 @@ public class ProductCommandHandler : IRequestHandler<ProductCommand, ErrorOr<Pro
 
     public async Task<ErrorOr<Product>> Handle(ProductCommand request, CancellationToken cancellationToken)
     {
-        var user = await _userRepository.GetUserByClaim(request.User);
+        var user = await _userRepository.GetUserByClaim(request.User, cancellationToken);
         if(user is null || user.Role == Roles.Buyer)
         {
             return Errors.Authentication.Forbidden;
@@ -46,11 +46,7 @@ public class ProductCommandHandler : IRequestHandler<ProductCommand, ErrorOr<Pro
 
         CategoryId categoryId = CategoryId.Create(categoryIdGuid);
 
-        var category = await _categoryRepository.GetById(categoryId); 
-        if(category is null)
-        {
-            return Errors.Category.NotFound;
-        }
+
 
         var product = Product.Create(
             request.Name,
@@ -59,8 +55,6 @@ public class ProductCommandHandler : IRequestHandler<ProductCommand, ErrorOr<Pro
             request.Description,
             categoryId);
 
-        category.AddProductId((ProductId)product.Id);
-        
 
         await _productRepository.Add(product, cancellationToken);
 

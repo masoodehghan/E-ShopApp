@@ -18,12 +18,17 @@ public class ProductUpdatedEvnetHandler : INotificationHandler<ProductUpdated>
 
     public async Task Handle(ProductUpdated notification, CancellationToken cancellationToken)
     {
-        Category? category = await _categoryRepository.GetById(notification.Product.CategoryId); 
+        Category? category = await _categoryRepository
+                    .GetById(notification.Product.CategoryId, cancellationToken); 
         if (category is null)
         {
-            return;
+            CancellationTokenSource source = new();
+            source.Cancel();
+            await _categoryRepository.CancelOperation(source.Token);
         }
-
-        category.AddProductId(ProductId.Create(notification.Product.Id.Value));
+        else
+        {
+            category.AddProductId(ProductId.Create(notification.Product.Id.Value));
+        }
     }
 }

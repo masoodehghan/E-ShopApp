@@ -25,7 +25,10 @@ public class LoginQueryHandler : IRequestHandler<LoginQuery, ErrorOr<AuthResult>
         CancellationToken cancellationToken)
     {
         await Task.CompletedTask;
-        if (await _userRepository.GetUserByEmail(command.Email) is not User user)
+        if (await _userRepository
+                .GetUserByEmail(command.Email, cancellationToken) is not User user
+            )
+            
             {
                 return Errors.Authentication.InvalidCredentials;
             }

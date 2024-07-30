@@ -24,7 +24,8 @@ public class CategoryDeleteQueryHandler : IRequestHandler<CategoryDeleteQuery, E
             return Errors.Category.NotFound;
         }
 
-        var category = await _categoryRepository.GetById(CategoryId.Create(categoryId));
+        var category = await _categoryRepository.
+                            GetById(CategoryId.Create(categoryId), cancellationToken);
 
         if(category is null)
         {

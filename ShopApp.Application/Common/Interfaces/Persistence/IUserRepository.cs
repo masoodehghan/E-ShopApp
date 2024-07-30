@@ -7,12 +7,12 @@ namespace ShopApp.Application.Common.Interfaces.Persistence;
 public interface IUserRepository
 {
 
-    Task Add(User user);
+    Task Add(User user, CancellationToken cancellationToken);
 
-    Task<User?> GetUserByEmail(string email);
+    Task<User?> GetUserByEmail(string email, CancellationToken cancellationToken);
 
-    Task<User?> GetUserById(Guid id);
+    Task<User?> GetUserById(Guid id, CancellationToken cancellationToken);
 
-    Task<User?> GetUserByClaim(ClaimsPrincipal user);
+    Task<User?> GetUserByClaim(ClaimsPrincipal user, CancellationToken cancellationToken);
 }
 

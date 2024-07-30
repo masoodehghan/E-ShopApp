@@ -28,7 +28,7 @@ public class RegisterCommandHandler : IRequestHandler<RegisterCommand, ErrorOr<A
         RegisterCommand request,
         CancellationToken cancellationToken)
     {
-        if(await _userRepository.GetUserByEmail(request.Email) is not null)
+        if(await _userRepository.GetUserByEmail(request.Email, cancellationToken) is not null)
         {
             return Errors.Authentication.DuplicateEmail;
         }
@@ -43,7 +43,7 @@ public class RegisterCommandHandler : IRequestHandler<RegisterCommand, ErrorOr<A
             request.Role
         );
 
-        await _userRepository.Add(user);
+        await _userRepository.Add(user, cancellationToken);
         
         var token = _jwtTokenGenerator.GenerateToken(user);
 

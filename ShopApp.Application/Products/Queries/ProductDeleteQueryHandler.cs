@@ -21,7 +21,7 @@ public class ProductDeleteQueryHandler : IRequestHandler<ProductDeleteQuery, Err
 
     public async Task<ErrorOr<bool>> Handle(ProductDeleteQuery request, CancellationToken cancellationToken)
     { 
-        var user = await _userRepository.GetUserByClaim(request.User);
+        var user = await _userRepository.GetUserByClaim(request.User, cancellationToken);
         if(user is null || user.Role == Roles.Buyer)
         {
             return Errors.Authentication.Forbidden;
@@ -39,7 +39,7 @@ public class ProductDeleteQueryHandler : IRequestHandler<ProductDeleteQuery, Err
             return Errors.Product.NotFound;
         }
 
-        await _productRepository.Delete(product);
+        await _productRepository.Delete(product, cancellationToken);
 
         return true;
 

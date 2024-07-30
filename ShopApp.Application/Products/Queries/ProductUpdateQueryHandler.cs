@@ -32,7 +32,7 @@ public class ProductUpdateQueryHandler : IRequestHandler<ProductUpdateQuery, Err
         ProductUpdateQuery request,
         CancellationToken cancellationToken)
     {
-        var user = await _userRepository.GetUserByClaim(request.User);
+        var user = await _userRepository.GetUserByClaim(request.User, cancellationToken);
         if(user is null || user.Role == Roles.Buyer)
         {
             return Errors.Authentication.Forbidden;
@@ -63,7 +63,7 @@ public class ProductUpdateQueryHandler : IRequestHandler<ProductUpdateQuery, Err
             request.Quantity,
             request.Description);
 
-        await _productRepository.Update(product);
+        await _productRepository.Update(product, cancellationToken);
 
         return product;
         

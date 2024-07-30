@@ -22,7 +22,7 @@ public class UserCreatedEventHandler : INotificationHandler<UserCreated>
         if (notification.User.Role == Roles.Buyer)
         {
             var buyer = Buyer.Create((UserId)notification.User.Id);
-            await _buyerRepository.Add(buyer);
+            await _buyerRepository.Add(buyer, cancellationToken);
         }
     }
 }

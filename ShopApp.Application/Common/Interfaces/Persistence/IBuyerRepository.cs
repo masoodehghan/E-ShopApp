@@ -7,6 +7,6 @@ namespace ShopApp.Application.Common.Interfaces.Persistence;
 
 public interface IBuyerRepository
 {
-    Task Add(Buyer buyer);
-    Task<Buyer> GetByUserId(UserId userId);
+    Task Add(Buyer buyer, CancellationToken cancellationToken);
+    Task<Buyer> GetByUserId(UserId userId, CancellationToken cancellationToken);
 }

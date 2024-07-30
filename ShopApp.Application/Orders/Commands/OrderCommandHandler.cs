@@ -44,10 +44,10 @@ public class OrderCommandHandler : IRequestHandler<OrderCommand, ErrorOr<Order>>
         }
 
 
-        var user = await _userRepository.GetUserByClaim(request.User);
+        var user = await _userRepository.GetUserByClaim(request.User, cancellationToken);
         if(user is null) return Errors.Authentication.Forbidden;
 
-        var buyer = await _buyerRepository.GetByUserId((UserId)user.Id);
+        var buyer = await _buyerRepository.GetByUserId((UserId)user.Id, cancellationToken);
 
         var order = Order.Create(
                 random.Next(10000,  9999999),

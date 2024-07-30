@@ -29,7 +29,7 @@ public class CategoryCommandHandler : IRequestHandler<CategoryCommand, ErrorOr<C
         CancellationToken cancellationToken)
     {
 
-        var user = await _userRepository.GetUserByClaim(request.User);
+        var user = await _userRepository.GetUserByClaim(request.User, cancellationToken);
         if(user is null || user.Role == Roles.Buyer)
         {
             return Errors.Authentication.Forbidden;

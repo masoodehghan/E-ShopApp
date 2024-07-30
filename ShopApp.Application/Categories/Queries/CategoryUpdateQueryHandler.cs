@@ -28,7 +28,7 @@ public class CategoryUpdateQueryHandler : IRequestHandler<CategoryUpdateQuery, E
         CategoryUpdateQuery request,
         CancellationToken cancellationToken)
     {
-        var user = await _userRepository.GetUserByClaim(request.User);
+        var user = await _userRepository.GetUserByClaim(request.User, cancellationToken);
         if(user is null || user.Role == Roles.Buyer)
         {
             return Errors.Authentication.Forbidden;
@@ -41,7 +41,7 @@ public class CategoryUpdateQueryHandler : IRequestHandler<CategoryUpdateQuery, E
         }
 
         var categoryToUpdate = 
-                    await _cateogryRepository.GetById(CategoryId.Create(res));
+                await _cateogryRepository.GetById(CategoryId.Create(res), cancellationToken);
         
         if (categoryToUpdate is null)
         {
@@ -49,7 +49,7 @@ public class CategoryUpdateQueryHandler : IRequestHandler<CategoryUpdateQuery, E
         }
 
         categoryToUpdate = Category.Update(categoryToUpdate, request.Name);
-        await _cateogryRepository.Update(categoryToUpdate);
+        await _cateogryRepository.Update(categoryToUpdate, cancellationToken);
         return categoryToUpdate;
 
     }
