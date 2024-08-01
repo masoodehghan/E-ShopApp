@@ -1,0 +1,52 @@
+@host = http://localhost:5256
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJnaXZlbl9uYW1lIjoic3RyaW5nIiwiZmFtaWx5X25hbWUiOiJzdHJpbmciLCJqdGkiOiI3NDkwOGMyMS1hN2Q3LTRkZjktOTU0ZS1kYjM2Zjg1OWQ1ODgiLCJzdWIiOiIyZDZlMmJkYi1lZTJlLTQ4MWYtYTE1Yi03NGYxZTViMjI3N2IiLCJleHAiOjE3MjQ3NjkzNjMsImlzcyI6InNob3AiLCJhdWQiOiJhbGkifQ._0xB5oISRIUpY2d9vdGN0AxkuBoOR2PVpKLhOAyxbhM
+@tokenBuyer = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJnaXZlbl9uYW1lIjoiYWxpIiwiZmFtaWx5X25hbWUiOiJha2JhcmkiLCJqdGkiOiIzZDBjOTk3MS1iYWRiLTQyNTEtYTg2Ni0yZDYyNzc1NjgxOTAiLCJzdWIiOiI0MjQwNjYxNC0xZjkyLTQ3MzAtODJlYy0yZDg1YWIyZmRjNjEiLCJleHAiOjE3MjQ3Njk0MTUsImlzcyI6InNob3AiLCJhdWQiOiJhbGkifQ.L7hk_E7X7VGmZINCD1gZBXb0mYVLX73Oy4J9heB2CEE
+
+
+
+Post {{host}}/api/dashboard/product
+Accept: application/json
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+    "name": "fsn",
+    "quantity": 10000,
+    "price": 1432.00,
+    "categoryId": "08DCD081-3F30-49E4-8919-743D57898C42",
+    "description": "lorem ipsum"
+}
+
+
+###
+
+Put {{host}}/api/dashboard/product
+Accept: application/json
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+    "id": "024378CA-09B1-4B06-B018-8862E5F6FA59",
+    "name": "ewr",
+    "quantity": 10,
+    "price": 84.00,
+    "categoryId": "f252b5dc-adc2-48fd-b02a-4651cb505b6b"
+}
+
+###
+
+GET {{host}}/api/dashboard/product
+Accept: application/json
+Content-Type: application/json
+
+###
+
+DELETE {{host}}/api/dashboard/product
+Accept: application/json
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+    "id": "5c4940b5-b147-4066-b76e-d3212e67bf32"
+}
+

@@ -1,0 +1,27 @@
+@host = http://localhost:5256
+
+
+Post {{host}}/api/auth/register
+Accept: application/json
+Content-Type: application/json
+
+{
+    "firstname": "ali",
+    "lastname": "adf",
+    "email": "as@tdest.com",
+    "username": "faasd",
+    "password": "123"
+}
+
+###
+
+POST  {{host}}/api/auth/login
+Accept: application/json
+Content-Type: application/json
+
+{
+    "email": "test@test.com",
+    "password": "234"
+}
+
+###

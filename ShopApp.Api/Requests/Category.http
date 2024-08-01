@@ -1,0 +1,44 @@
+@host = http://localhost:5256
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJnaXZlbl9uYW1lIjoic3RyaW5nIiwiZmFtaWx5X25hbWUiOiJzdHJpbmciLCJqdGkiOiI3NDkwOGMyMS1hN2Q3LTRkZjktOTU0ZS1kYjM2Zjg1OWQ1ODgiLCJzdWIiOiIyZDZlMmJkYi1lZTJlLTQ4MWYtYTE1Yi03NGYxZTViMjI3N2IiLCJleHAiOjE3MjQ3NjkzNjMsImlzcyI6InNob3AiLCJhdWQiOiJhbGkifQ._0xB5oISRIUpY2d9vdGN0AxkuBoOR2PVpKLhOAyxbhM
+@tokenBuyer = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJnaXZlbl9uYW1lIjoiYWxpIiwiZmFtaWx5X25hbWUiOiJha2JhcmkiLCJqdGkiOiIzZDBjOTk3MS1iYWRiLTQyNTEtYTg2Ni0yZDYyNzc1NjgxOTAiLCJzdWIiOiI0MjQwNjYxNC0xZjkyLTQ3MzAtODJlYy0yZDg1YWIyZmRjNjEiLCJleHAiOjE3MjQ3Njk0MTUsImlzcyI6InNob3AiLCJhdWQiOiJhbGkifQ.L7hk_E7X7VGmZINCD1gZBXb0mYVLX73Oy4J9heB2CEE
+
+
+POST {{host}}/api/dashboard/category
+Accept: application/json
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+    "name": "tv"
+}
+
+###
+
+PUT {{host}}/api/dashboard/category
+Accept: application/json
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+    "Id": "169b70a6-5f15-4c83-a3b7-a5c276fadadc",
+    "name": "modified name"
+}
+
+###
+
+GET {{host}}/api/dashboard/category
+Accept: application/json
+Content-Type: application/json
+
+###
+
+
+DELETE {{host}}/api/dashboard/category
+Accept: application/json
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+    "categoryId": "08DCD081-3F30-49E4-8919-743D57898C42"
+}
+

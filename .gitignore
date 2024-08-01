@@ -3,5 +3,4 @@
 **/obj
 .vs*
 */appsettings*.json
-*.http
 *.sqlite3*
