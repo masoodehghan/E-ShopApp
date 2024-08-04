@@ -2,6 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using ShopApp.Domain.BuyerAggregate.ValueObjects;
 using ShopApp.Domain.OrderAggregate;
+using ShopApp.Domain.OrderAggregate.Enums;
 using ShopApp.Domain.OrderAggregate.ValueObjects;
 using ShopApp.Domain.ProductAggregate.ValueObjects;
 
@@ -65,6 +66,10 @@ public class OrderConfiguration : IEntityTypeConfiguration<Order>
                     id => id.Value,
                     value => BuyerId.Create(value)
                  );
+
+        builder.Property(o => o.OrderStatus)
+            .HasDefaultValue(OrderStatus.UnPaid)
+            .HasConversion<string>();
 
     }
 }

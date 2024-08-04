@@ -43,12 +43,19 @@ public class ProductController : ApiController
     {
         var command = _mapper.Map<ProductCommand>((request, User));
 
+        try
+        {
         var result = await _mediatr.Send(command);
 
         return result.Match(
             product => Created("", _mapper.Map<ProductResponse>(product)),
             errors => Problem(errors)
         );
+        }
+        catch(TaskCanceledException _)
+        {
+            return Problem();
+        }
     }
 
     [HttpPut]

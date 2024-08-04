@@ -1,6 +1,7 @@
 using ShopApp.Domain.BuyerAggregate.ValueObjects;
 using ShopApp.Domain.Common.Models;
 using ShopApp.Domain.OrderAggregate.Entities;
+using ShopApp.Domain.OrderAggregate.Enums;
 using ShopApp.Domain.OrderAggregate.Evnents;
 using ShopApp.Domain.OrderAggregate.ValueObjects;
 
@@ -18,18 +19,22 @@ public sealed class Order : AggregateRoot<OrderId, Guid>
     
     public BuyerId BuyerId { get; private set; }
 
+    public OrderStatus? OrderStatus { get; private set; } = null;
+
     private Order(
         OrderId id,
         int number,
         List<OrderItem> orderItems,
         Address address,
-        BuyerId buyerId)
+        BuyerId buyerId,
+        OrderStatus orderStatus = Enums.OrderStatus.UnPaid)
     {
         Id = id;
         Number = number;
         _orderItems = orderItems;
         Address = address;
         BuyerId = buyerId;
+        OrderStatus = orderStatus;
     }
 
     public static Order Create(

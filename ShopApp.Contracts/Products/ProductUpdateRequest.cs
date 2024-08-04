@@ -5,6 +5,7 @@ public record ProductUpdateRequest(
     string? Description,
     float? Price,
     int? Quantity,
+    bool? IsAvailable,
     string? CategoryId,
     string? Id
 );

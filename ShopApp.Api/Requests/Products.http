@@ -13,7 +13,7 @@ Authorization: Bearer {{token}}
     "name": "fsn",
     "quantity": 10000,
     "price": 1432.00,
-    "categoryId": "08DCD081-3F30-49E4-8919-743D57898C42",
+    "categoryId": "0E496697-BB57-4D9E-8686-5E282095F641",
     "description": "lorem ipsum"
 }
 

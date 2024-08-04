@@ -16,7 +16,7 @@ public sealed class User : AggregateRoot<UserId, Guid>
     public string HashedPassword { get; private set; }
     public long? PhoneNumber { get; private set; }
 
-    public Roles Role { get; private set; } = Roles.Buyer;
+    public Roles? Role { get; private set; } = null;
 
 
     private User(
@@ -27,7 +27,7 @@ public sealed class User : AggregateRoot<UserId, Guid>
         string hashedPassword,
         string username,
         long? phoneNumber,
-        Roles role)
+        Roles role = Roles.Buyer)
     {
         Id = id;
         FirstName = firstName;

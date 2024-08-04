@@ -52,7 +52,8 @@ public class UserConfiguration : IEntityTypeConfiguration<User>
                     .IsRequired(true);
 
         builder.Property(c => c.Role)
-                .HasDefaultValue(Roles.Buyer);
+                .HasDefaultValue(Roles.Buyer)
+                .HasConversion<string>();
 
 
     }

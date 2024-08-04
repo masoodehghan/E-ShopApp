@@ -25,6 +25,8 @@ public sealed class Product : AggregateRoot<ProductId, Guid>
     private readonly List<TagId> _tagIds = new();
     public IReadOnlyList<TagId> TagIds => _tagIds.AsReadOnly();
 
+    public bool IsAvailable { get; private set; } = true;
+
     private Product(
         ProductId id,
         string name,
@@ -33,7 +35,8 @@ public sealed class Product : AggregateRoot<ProductId, Guid>
         string? description,
         CategoryId categoryId,
         List<OrderItemId> orderItemIds,
-        List<TagId> tagIds)
+        List<TagId> tagIds,
+        bool isAvailable = true)
     {
         Id = id;
         Name = name;
@@ -43,6 +46,7 @@ public sealed class Product : AggregateRoot<ProductId, Guid>
         CategoryId = categoryId;
         _orderItemIds = orderItemIds;
         _tagIds = tagIds;
+        IsAvailable = isAvailable;
     }
 
 
@@ -53,7 +57,8 @@ public sealed class Product : AggregateRoot<ProductId, Guid>
         string? description,
         CategoryId categoryId,
         List<OrderItemId>? orderItemIds = null,
-        List<TagId>? tagIds = null)
+        List<TagId>? tagIds = null,
+        bool isAvailable = true)
     {
         Product product = new(
             ProductId.CreateUnique(),
@@ -63,7 +68,8 @@ public sealed class Product : AggregateRoot<ProductId, Guid>
             description,
             categoryId,
             orderItemIds ?? new(),
-            tagIds ?? new()
+            tagIds ?? new(),
+            isAvailable
         );
 
         product.AddDomainEvents(new ProductCreated(product));
@@ -78,7 +84,8 @@ public sealed class Product : AggregateRoot<ProductId, Guid>
         float? price = null,
         CategoryId? categoryId = null,
         int? quantity = null,
-        string? description = null)
+        string? description = null,
+        bool? isAvailable = null)
     
     {
         product.Price = price ?? product.Price;
@@ -86,6 +93,7 @@ public sealed class Product : AggregateRoot<ProductId, Guid>
         product.CategoryId = categoryId ?? product.CategoryId;
         product.Quantity = quantity ?? product.Quantity;
         product.Description = description ?? product.Description;
+        product.IsAvailable = isAvailable ?? product.IsAvailable;
 
         product.AddDomainEvents(new ProductUpdated(product));
         

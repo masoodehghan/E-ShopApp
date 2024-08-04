@@ -20,7 +20,7 @@ public class OrderCreatedEventHandler : INotificationHandler<OrderCreated>
         {
             var product = await _productRepository
                             .GetById(orderItem.ProductId, cancellationToken);
-            if(product is null)
+            if(product is null || product.IsAvailable == false)
             {
                 CancellationTokenSource source = new();
                 source.Cancel();
