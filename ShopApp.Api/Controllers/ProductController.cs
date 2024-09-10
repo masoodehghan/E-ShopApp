@@ -99,13 +99,20 @@ public class ProductController : ApiController
     [AllowAnonymous]
     public async Task<IActionResult> Get(string id, CancellationToken cancellationToken)
     {
-        if(!Guid.TryParse(id, out Guid productId))  return NotFound();
+        var result = await _mediatr.Send(new ProductDetailQuery(id));
+
+
+        return result.Match(
+            product => Ok(product),
+            errors => Problem(errors)
+        );
+        // var product = await _productRepository.GetById(ProductId.Create(productId), cancellationToken);
+
+        // if(product is null)  return NotFound();
+
+        // return Ok(_mapper.Map<ProductResponse>(product));
+
         
-        var product = await _productRepository.GetById(ProductId.Create(productId), cancellationToken);
-
-        if(product is null)  return NotFound();
-
-        return Ok(_mapper.Map<ProductResponse>(product));
     }
 
 }

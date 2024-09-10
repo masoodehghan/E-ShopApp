@@ -21,7 +21,7 @@ public sealed class Tag : AggregateRoot<TagId, Guid>
     }
 
 
-    public static Tag Create(string name, List<ProductId> productIds)
+    public static Tag Create(string name, List<ProductId>? productIds = null)
     {
         return new(TagId.CreateUnique(), name, productIds ?? new());
     }

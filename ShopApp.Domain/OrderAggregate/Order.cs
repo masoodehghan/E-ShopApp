@@ -19,6 +19,8 @@ public sealed class Order : AggregateRoot<OrderId, Guid>
     
     public BuyerId BuyerId { get; private set; }
 
+    public float? TotalPrice { get; private set; }
+
     public OrderStatus? OrderStatus { get; private set; } = null;
 
     private Order(
@@ -55,6 +57,11 @@ public sealed class Order : AggregateRoot<OrderId, Guid>
         order.AddDomainEvents(new OrderCreated(order));
 
         return order;
+    }
+
+    public void SetTotalPrice(float totalPrice)
+    {
+        TotalPrice = totalPrice;
     }
 
     #pragma warning disable CS8618

@@ -20,7 +20,7 @@ public class ProductListQueryHandler : IRequestHandler<ProductListQuery, IEnumer
     {
         using(IDbConnection connection = _dapperContext.ConnectionCreate() )
         {
-            var query = @"SELECT p.Name, p.ProductId,
+            var query = @"SELECT p.Name, p.ProductId, p.IsAvailable,
                         p.Description, p.Quantity, p.Price,
                         c.CategoryId, c.Name
                         FROM products AS p

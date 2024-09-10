@@ -14,7 +14,7 @@ public record AddressRequest(
 );
 
 public record OrderItemRequest(
-    string ProductId,
+    Guid ProductId,
     int Quantity
 );
 

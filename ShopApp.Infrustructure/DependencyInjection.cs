@@ -42,10 +42,14 @@ public static class DependencyInjection
         services.AddScoped<IProductRepository, ProductRepository>();
         services.AddScoped<IBuyerRepository, BuyerRepository>();
         services.AddScoped<IOrderRepository, OrderRepository>();
+        services.AddScoped<ITagRepository, TagRepository>();
+
 
         services.AddScoped<PublishDomainEventsInterceptor>();
 
-        services.AddScoped<IDapperContext, DapperContext>(s => new DapperContext(configuration));
+        services.AddScoped<IDapperContext, DapperContext>(
+            s => new DapperContext(configuration)
+        );
 
         services.AddDbContext<ShopAppDbContext>(
             options => options.UseSqlite(configuration.GetConnectionString("DefaultConnection"))

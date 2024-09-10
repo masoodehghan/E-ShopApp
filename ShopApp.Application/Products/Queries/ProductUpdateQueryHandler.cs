@@ -38,17 +38,7 @@ public class ProductUpdateQueryHandler : IRequestHandler<ProductUpdateQuery, Err
             return Errors.Authentication.Forbidden;
         }
 
-        if(!Guid.TryParse(request.Id, out Guid productId))
-        {
-            return Errors.Product.NotFound;
-        }
-
-        if(!Guid.TryParse(request.CategoryId, out Guid categoryId))
-        {
-            return Errors.Category.NotFound;
-        }
-
-        var product = await _productRepository.GetById(ProductId.Create(productId), cancellationToken);
+        var product = await _productRepository.GetById(ProductId.Create(request.Id), cancellationToken);
         
         if(product is null)
         {
@@ -59,7 +49,7 @@ public class ProductUpdateQueryHandler : IRequestHandler<ProductUpdateQuery, Err
             product,
             request.Name,
             request.Price,
-            CategoryId.Create(categoryId),
+            (request.CategoryId is null) ? null : CategoryId.Create((Guid)request.CategoryId),
             request.Quantity,
             request.Description);
 

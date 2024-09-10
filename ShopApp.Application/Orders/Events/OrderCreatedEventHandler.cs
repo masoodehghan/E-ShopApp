@@ -16,20 +16,30 @@ public class OrderCreatedEventHandler : INotificationHandler<OrderCreated>
 
     public async Task Handle(OrderCreated notification, CancellationToken cancellationToken)
     {
+        float totalPrice = 0;
         foreach(var orderItem in notification.Order.OrderItems)
         {
             var product = await _productRepository
                             .GetById(orderItem.ProductId, cancellationToken);
-            if(product is null || product.IsAvailable == false)
+            if(product is null
+                || product.IsAvailable == false
+                || orderItem.Quantity > product.Quantity)
+                
             {
                 CancellationTokenSource source = new();
                 source.Cancel();
                 await _productRepository.CancelOperations(source.Token);
+                return;
             }
             else
             {
                 product.AddOrderItemId(orderItem.Id);
             }
+            
+            totalPrice += product.Price * orderItem.Quantity;
         }
+
+        notification.Order.SetTotalPrice(totalPrice);
+
     }
 }

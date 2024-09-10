@@ -39,21 +39,13 @@ public class ProductCommandHandler : IRequestHandler<ProductCommand, ErrorOr<Pro
             return Errors.Authentication.Forbidden;
         }
 
-        if(!Guid.TryParse(request.CategoryId, out Guid categoryIdGuid))
-        {
-            return Errors.Category.NotFound;
-        }
-
-        CategoryId categoryId = CategoryId.Create(categoryIdGuid);
-
-
 
         var product = Product.Create(
             request.Name,
             request.Price,
             request.Quantity,
             request.Description,
-            categoryId);
+            CategoryId.Create(request.CategoryId));
 
 
         await _productRepository.Add(product, cancellationToken);

@@ -8,11 +8,11 @@ namespace ShopApp.Application.Products.Queries;
 
 
 public record ProductUpdateQuery(
-    string Id,
+    Guid Id,
     string Name,
     float Price,
     int Quantity,
     string Description,
-    string CategoryId,
+    Guid? CategoryId,
     ClaimsPrincipal User
 ) : IRequest<ErrorOr<Product>>;

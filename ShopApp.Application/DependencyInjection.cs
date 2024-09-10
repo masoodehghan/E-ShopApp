@@ -4,6 +4,7 @@ using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 using ShopApp.Application.Authentication.Commands.Register;
 using System.Reflection;
+using ShopApp.Application.Products.Commands;
 
 namespace ShopApp.Application.Services;
 
@@ -17,6 +18,7 @@ public static class DependencyInjection
         var assemblies = new[]
         {
             typeof(RegisterCommandValidator).Assembly,
+            typeof(ProductValidator).Assembly
             // typeof(LoginQueryValidation).Assembly
         };
 

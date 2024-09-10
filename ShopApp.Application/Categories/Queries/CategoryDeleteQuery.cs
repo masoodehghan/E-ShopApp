@@ -6,6 +6,6 @@ namespace ShopApp.Application.Categories.Queries;
 
 
 public record CategoryDeleteQuery(
-    string CategoryId,
+    Guid CategoryId,
     ClaimsPrincipal User
 ) : IRequest<ErrorOr<bool>>;

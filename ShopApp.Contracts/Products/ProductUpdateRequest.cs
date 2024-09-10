@@ -6,6 +6,6 @@ public record ProductUpdateRequest(
     float? Price,
     int? Quantity,
     bool? IsAvailable,
-    string? CategoryId,
-    string? Id
+    Guid? CategoryId,
+    Guid Id
 );

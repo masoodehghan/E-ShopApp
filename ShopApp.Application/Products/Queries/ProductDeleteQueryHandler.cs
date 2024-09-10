@@ -27,12 +27,8 @@ public class ProductDeleteQueryHandler : IRequestHandler<ProductDeleteQuery, Err
             return Errors.Authentication.Forbidden;
         }
 
-        if(!Guid.TryParse(request.Id, out Guid productId))
-        {
-            return Errors.Product.NotFound;
-        }
 
-        var product = await _productRepository.GetById(ProductId.Create(productId), cancellationToken);
+        var product = await _productRepository.GetById(ProductId.Create(request.Id), cancellationToken);
 
         if(product is null)
         {

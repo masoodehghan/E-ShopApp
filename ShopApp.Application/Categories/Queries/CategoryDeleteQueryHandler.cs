@@ -19,13 +19,9 @@ public class CategoryDeleteQueryHandler : IRequestHandler<CategoryDeleteQuery, E
 
     public async Task<ErrorOr<bool>> Handle(CategoryDeleteQuery request, CancellationToken cancellationToken)
     {
-        if(!Guid.TryParse(request.CategoryId, out Guid categoryId))
-        {
-            return Errors.Category.NotFound;
-        }
-
+      
         var category = await _categoryRepository.
-                            GetById(CategoryId.Create(categoryId), cancellationToken);
+                            GetById(CategoryId.Create(request.CategoryId), cancellationToken);
 
         if(category is null)
         {

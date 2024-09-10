@@ -6,6 +6,6 @@ namespace ShopApp.Application.Products.Queries;
 
 
 public record ProductDeleteQuery(
-    string Id,
+    Guid Id,
     ClaimsPrincipal User
 ) : IRequest<ErrorOr<bool>>;

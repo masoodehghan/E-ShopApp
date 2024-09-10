@@ -6,6 +6,7 @@ public class OrderResponse
     public string? OrderId { get; set; }
     public string? Number { get; set; }
     public AddressResponse? Address { get; set; }
+    public float? TotalPrice { get; set; }
     public List<OrderItemResponse> OrderItems { get; set; } = new(); 
 }
 

@@ -1,5 +1,5 @@
 @host = http://localhost:5256
-@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJnaXZlbl9uYW1lIjoic3RyaW5nIiwiZmFtaWx5X25hbWUiOiJzdHJpbmciLCJqdGkiOiI3NDkwOGMyMS1hN2Q3LTRkZjktOTU0ZS1kYjM2Zjg1OWQ1ODgiLCJzdWIiOiIyZDZlMmJkYi1lZTJlLTQ4MWYtYTE1Yi03NGYxZTViMjI3N2IiLCJleHAiOjE3MjQ3NjkzNjMsImlzcyI6InNob3AiLCJhdWQiOiJhbGkifQ._0xB5oISRIUpY2d9vdGN0AxkuBoOR2PVpKLhOAyxbhM
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJnaXZlbl9uYW1lIjoic3RyaW5nIiwiZmFtaWx5X25hbWUiOiJzdHJpbmciLCJqdGkiOiJiMmRlZWFhYy00ZWY3LTQwODgtYTJhZC03YmQ3ZjhlZDA1YWMiLCJzdWIiOiIyZDZlMmJkYi1lZTJlLTQ4MWYtYTE1Yi03NGYxZTViMjI3N2IiLCJleHAiOjE3Mjg1ODg1NjQsImlzcyI6InNob3AiLCJhdWQiOiJhbGkifQ.G9E-M4oBj0ivSOf5ZPzBbe_enuhPiUFRbQHviWB7vOw
 @tokenBuyer = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJnaXZlbl9uYW1lIjoiYWxpIiwiZmFtaWx5X25hbWUiOiJha2JhcmkiLCJqdGkiOiIzZDBjOTk3MS1iYWRiLTQyNTEtYTg2Ni0yZDYyNzc1NjgxOTAiLCJzdWIiOiI0MjQwNjYxNC0xZjkyLTQ3MzAtODJlYy0yZDg1YWIyZmRjNjEiLCJleHAiOjE3MjQ3Njk0MTUsImlzcyI6InNob3AiLCJhdWQiOiJhbGkifQ.L7hk_E7X7VGmZINCD1gZBXb0mYVLX73Oy4J9heB2CEE
 
 
@@ -10,10 +10,10 @@ Content-Type: application/json
 Authorization: Bearer {{token}}
 
 {
-    "name": "fsn",
+    "name": "sdfn",
     "quantity": 10000,
     "price": 1432.00,
-    "categoryId": "0E496697-BB57-4D9E-8686-5E282095F641",
+    "categoryId": "0E496697-BB57-4D9E-8686-5E282095641",
     "description": "lorem ipsum"
 }
 
@@ -26,11 +26,10 @@ Content-Type: application/json
 Authorization: Bearer {{token}}
 
 {
-    "id": "024378CA-09B1-4B06-B018-8862E5F6FA59",
-    "name": "ewr",
+    "id": "41A45589-3F6C-4981-AA4F-58F46EC5F11B",
+    "name": "modified",
     "quantity": 10,
-    "price": 84.00,
-    "categoryId": "f252b5dc-adc2-48fd-b02a-4651cb505b6b"
+    "isAvailable": true
 }
 
 ###
@@ -47,6 +46,6 @@ Content-Type: application/json
 Authorization: Bearer {{token}}
 
 {
-    "id": "5c4940b5-b147-4066-b76e-d3212e67bf32"
+    "id": "E49A8506-6771-41A0-B2DF-606FC9AC3421"
 }
 

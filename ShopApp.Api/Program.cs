@@ -1,5 +1,7 @@
+using Microsoft.AspNetCore.Http.HttpResults;
 using ShopApp.Api;
 using ShopApp.Application.Services;
+using ShopApp.Contracts.Products;
 using ShopApp.Infrustructure;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -26,6 +28,6 @@ if (app.Environment.IsDevelopment())
 app.MapControllers();
 app.UseHttpsRedirection();
 
-
+app.MapPost("sdf", (ProductDeleteRequest request) => "saodif");
 
 app.Run();
