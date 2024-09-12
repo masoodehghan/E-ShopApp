@@ -1,7 +1,9 @@
 using MapsterMapper;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using ShopApp.Application.Tags.Commands;
+using ShopApp.Application.Tags.Queries;
 using ShopApp.Contracts.Tags;
 
 namespace ShopApp.Api.Controllers;
@@ -31,5 +33,15 @@ public class TagController : ApiController
             tag => Ok(_mapper.Map<TagResponse>(tag)),
             errors => Problem(errors)
         );
+    }
+
+
+    [AllowAnonymous]
+    [HttpGet]
+    public async Task<IActionResult> Get()
+    {
+        var result = await _mediatr.Send(new TagListQuery());
+
+        return Ok(result);
     }
 }
