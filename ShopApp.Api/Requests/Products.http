@@ -10,12 +10,12 @@ Content-Type: application/json
 Authorization: Bearer {{token}}
 
 {
-    "name": "sdfn",
+    "name": "ali",
     "quantity": 10000,
     "price": 1432.00,
     "categoryId": "0E496697-BB57-4D9E-8686-5E282095F641",
     "description": "lorem ipsum",
-    "tagIds": ["083A2E50-6504-44A1-9236-4532167B728C"]
+    "tagIds": ["083A2E50-6504-44A1-9236-4532167B728C", "1D5EBF49-F392-49B9-897D-9EB0702021FE"]
 }
 
 
