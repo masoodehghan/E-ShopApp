@@ -8,6 +8,7 @@ using ShopApp.Domain.Common.Errors;
 using ShopApp.Domain.CategoryAggregate.ValueObjects;
 using ShopApp.Domain.CategoryAggregate;
 using ShopApp.Domain.ProductAggregate.ValueObjects;
+using ShopApp.Domain.TagAggregate.ValueObjects;
 
 namespace ShopApp.Application.Products.Commands;
 
@@ -45,7 +46,10 @@ public class ProductCommandHandler : IRequestHandler<ProductCommand, ErrorOr<Pro
             request.Price,
             request.Quantity,
             request.Description,
-            CategoryId.Create(request.CategoryId));
+            CategoryId.Create(request.CategoryId),
+            null,
+            request.TagIds?.Select(f => TagId.Create(f)).ToList()
+            );
 
 
         await _productRepository.Add(product, cancellationToken);

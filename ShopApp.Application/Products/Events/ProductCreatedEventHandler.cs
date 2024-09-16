@@ -12,16 +12,16 @@ public class ProductCreatedEventHandler : INotificationHandler<ProductCreated>
 {
 
     private readonly ICategoryRepository _categoryRepository;
+    private readonly ITagRepository _tagRepository;
 
-    public ProductCreatedEventHandler(ICategoryRepository categoryRepository)
+    public ProductCreatedEventHandler(ICategoryRepository categoryRepository, ITagRepository tagRepository)
     {
         _categoryRepository = categoryRepository;
+        _tagRepository = tagRepository;
     }
 
     public async Task Handle(ProductCreated notification, CancellationToken cancellationToken)
     {
-        await Task.CompletedTask;
-        
         
         Category? category = await _categoryRepository
                             .GetById(notification.Prodcut.CategoryId, cancellationToken); 
@@ -35,6 +35,23 @@ public class ProductCreatedEventHandler : INotificationHandler<ProductCreated>
         else
         {
             category.AddProductId((ProductId)notification.Prodcut.Id);
+        }
+
+        foreach(var tagId in notification.Prodcut.TagIds)
+        {
+            var tag = await _tagRepository.GetById(tagId, cancellationToken);
+
+            if(tag is null)
+            {
+                CancellationTokenSource source = new();
+                source.Cancel();
+                await _categoryRepository.CancelOperation(source.Token);
+            }
+            else
+            {
+                tag.AddProductId((ProductId)notification.Prodcut.Id);
+            }
+
         }
     }   
 }

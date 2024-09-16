@@ -14,6 +14,7 @@ public record ProductCommand(
     Guid CategoryId,
     float Price,
     string Description,
+    List<Guid>? TagIds,
     ClaimsPrincipal User
 
 ) : IRequest<ErrorOr<Product>>;

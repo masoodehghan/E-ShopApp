@@ -6,5 +6,6 @@ public record ProductCreateRequest(
     int Quantity,
     Guid CategoryId,
     float Price,
-    string? Description
+    string? Description,
+    List<Guid>? TagIds
 );

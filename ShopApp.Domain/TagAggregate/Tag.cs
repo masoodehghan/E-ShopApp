@@ -26,6 +26,14 @@ public sealed class Tag : AggregateRoot<TagId, Guid>
         return new(TagId.CreateUnique(), name, productIds ?? new());
     }
 
+    public void AddProductId(ProductId productId)
+    {
+        if(!_productIds.Contains(productId))
+        {
+            _productIds.Add(productId);
+        }
+    }
+
     #pragma warning disable CS8618
     private Tag()
     { }
